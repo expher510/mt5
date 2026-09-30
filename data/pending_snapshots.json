@@ -1,0 +1,97 @@
+{
+  "trade_snapshots": {},
+  "pending_by_symbol": {
+    "XAUUSD": [
+      {
+        "snapshot_id": "1788788890",
+        "symbol": "XAUUSD",
+        "ticket": 1788788890,
+        "direction": "BUY",
+        "lot_size": 0.05,
+        "entry_price": 2650.0,
+        "sl": 2645.0,
+        "tp": 2660.0,
+        "tp1": 2660.0,
+        "tp2": 2660.0,
+        "tp3": 2660.0,
+        "sl_distance": 5.0,
+        "sl_pips": 50.0,
+        "entry_time": 1788788890.6538,
+        "entry_time_str": "2026-09-07 13:48:10 UTC",
+        "comment": "TEST",
+        "adx": 28.0,
+        "rsi": 50.0,
+        "atr": 4.5,
+        "macro_trend": "BULLISH",
+        "m15_trend": "NEUTRAL",
+        "market_regime": "UNKNOWN",
+        "strategy_profile": "HYBRID",
+        "models_triggered": [
+          "TEST_MODEL"
+        ],
+        "session_name": "UNKNOWN",
+        "dxy_bias": "NEUTRAL_DXY"
+      },
+      {
+        "snapshot_id": "1788788921",
+        "symbol": "XAUUSD",
+        "ticket": 1788788921,
+        "direction": "BUY",
+        "lot_size": 0.05,
+        "entry_price": 2650.0,
+        "sl": 2645.0,
+        "tp": 2660.0,
+        "tp1": 2660.0,
+        "tp2": 2660.0,
+        "tp3": 2660.0,
+        "sl_distance": 5.0,
+        "sl_pips": 50.0,
+        "entry_time": 1788788921.5822573,
+        "entry_time_str": "2026-09-07 13:48:41 UTC",
+        "comment": "TEST",
+        "adx": 28.0,
+        "rsi": 50.0,
+        "atr": 4.5,
+        "macro_trend": "BULLISH",
+        "m15_trend": "NEUTRAL",
+        "market_regime": "UNKNOWN",
+        "strategy_profile": "HYBRID",
+        "models_triggered": [
+          "TEST_MODEL"
+        ],
+        "session_name": "UNKNOWN",
+        "dxy_bias": "NEUTRAL_DXY"
+      },
+      {
+        "snapshot_id": "1788790456",
+        "symbol": "XAUUSD",
+        "ticket": 1788790456,
+        "direction": "BUY",
+        "lot_size": 0.05,
+        "entry_price": 2650.0,
+        "sl": 2645.0,
+        "tp": 2660.0,
+        "tp1": 2660.0,
+        "tp2": 2660.0,
+        "tp3": 2660.0,
+        "sl_distance": 5.0,
+        "sl_pips": 50.0,
+        "entry_time": 1788790456.5361674,
+        "entry_time_str": "2026-09-07 14:14:16 UTC",
+        "comment": "TEST",
+        "adx": 28.0,
+        "rsi": 50.0,
+        "atr": 4.5,
+        "macro_trend": "BULLISH",
+        "m15_trend": "NEUTRAL",
+        "market_regime": "UNKNOWN",
+        "strategy_profile": "HYBRID",
+        "models_triggered": [
+          "TEST_MODEL"
+        ],
+        "session_name": "UNKNOWN",
+        "dxy_bias": "NEUTRAL_DXY"
+      }
+    ]
+  }
+}

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forex Engineer — Account Mirror (Watch Only)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --panel-bg: #0d121c;
+      --card-bg: #121826;
+      --border-color: #1e293b;
+      --border-focus: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --buy-green: #10b981;
+      --buy-green-bg: rgba(16, 185, 129, 0.15);
+      --sell-red: #ef4444;
+      --sell-red-bg: rgba(239, 68, 68, 0.15);
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --gold-accent: #f59e0b;
+      --gold-bg: rgba(245, 158, 11, 0.12);
+      --be-cyan: #06b6d4;
+      --be-bg: rgba(6, 182, 212, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    code, pre, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Top Bar */
+    header {
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .brand-sub {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .nav-tabs {
+      display: flex;
+      background: var(--card-bg);
+      padding: 0.25rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab.active {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .investor-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(14, 165, 233, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .btn-test-refuse {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .btn-test-refuse:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fff;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      padding: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Account Header Banner */
+    .account-banner {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .acc-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .acc-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .acc-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge-subtle {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    /* Content Cards */
+    .content-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: var(--card-bg);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+      color: var(--text-main);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .dir-buy {
+      background: var(--buy-green-bg);
+      color: var(--buy-green);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+
+    .dir-sell {
+      background: var(--sell-red-bg);
+      color: var(--sell-red);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+
+    .badge-be {
+      background: var(--be-bg);
+      color: var(--be-cyan);
+      font-weight: 600;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+
+    .badge-target-hit {
+      background: var(--buy-green-bg);
+      color: var(--buy-green);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    .badge-stop-hit {
+      background: var(--sell-red-bg);
+      color: var(--sell-red);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    .badge-manual {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    .r-pos {
+      color: var(--buy-green);
+      font-weight: 700;
+    }
+
+    .r-neg {
+      color: var(--sell-red);
+      font-weight: 700;
+    }
+
+    .action-link {
+      color: var(--accent-blue);
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.75rem;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    .modal-body img {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Auth Banner */
+    .auth-banner {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--gold-accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-login {
+      background: var(--accent-blue);
+      border: none;
+      color: #fff;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-badge">MIRROR</div>
+      <div>
+        <div class="brand-title">FOREX ENGINEER — ACCOUNT MIRROR</div>
+        <div class="brand-sub">Watching MT5 #8058543 · Read-Only Investor Session</div>
+      </div>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" id="tab-positions-btn" onclick="switchTab('positions')">
+        <span>Active Positions</span>
+        <span class="badge-subtle" id="count-open">0</span>
+      </button>
+      <button class="nav-tab" id="tab-updates-btn" onclick="switchTab('updates')">
+        <span>Live Updates</span>
+        <span class="badge-subtle" id="count-updates">0</span>
+      </button>
+      <button class="nav-tab" id="tab-closed-btn" onclick="switchTab('closed')">
+        <span>Closed Trades</span>
+        <span class="badge-subtle" id="count-closed">0</span>
+      </button>
+    </div>
+
+    <div class="header-status">
+      <div class="investor-badge">
+        <span class="live-dot"></span>
+        <span>READ-ONLY (INVESTOR)</span>
+      </div>
+      <button class="btn-test-refuse" onclick="testOrderRefusal()">
+        Test Order Refusal
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div id="auth-alert" class="auth-banner" style="display: none;">
+      <span>🔒 Mirror dashboard is locked. Enter password to view real-time trades.</span>
+      <button class="btn-login" onclick="promptLogin()">Enter Password</button>
+    </div>
+
+    <!-- Account Details Banner -->
+    <div class="account-banner">
+      <div class="acc-item">
+        <span class="acc-label">Account & Server</span>
+        <span class="acc-value mono" id="acc-login-server">8058543 <span class="badge-subtle">SCFMLimited-Demo2</span></span>
+      </div>
+      <div class="acc-item">
+        <span class="acc-label">Credential Mode</span>
+        <span class="acc-value" style="color: #38bdf8;">Investor Password</span>
+      </div>
+      <div class="acc-item">
+        <span class="acc-label">Order Send Guarantee</span>
+        <span class="acc-value" style="color: var(--buy-green); font-size: 0.95rem;">Physically Blocked (Read-Only)</span>
+      </div>
+      <div class="acc-item">
+        <span class="acc-label">Last Polled</span>
+        <span class="acc-value mono" id="last-poll-time" style="font-size: 0.95rem; color: var(--text-dim);">Connecting...</span>
+      </div>
+    </div>
+
+    <!-- TAB 1: ACTIVE POSITIONS -->
+    <div id="panel-positions" class="content-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>Active Mirrored Positions</span>
+          <span class="badge-subtle" id="table-open-count">0 positions</span>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-dim);">
+          Lot sizes and live prices stream directly from MT5 terminal
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Ticket</th>
+              <th>Symbol</th>
+              <th>Direction</th>
+              <th>Lot Size</th>
+              <th>Entry Price</th>
+              <th>Current SL</th>
+              <th>Current TP</th>
+              <th>R:R</th>
+              <th>Opened (UTC)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="open-positions-tbody">
+            <tr>
+              <td colspan="10" class="empty-state">No open positions. Watching terminal...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: LIVE MODIFICATIONS & UPDATES -->
+    <div id="panel-updates" class="content-panel" style="display: none;">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>Stop & Target Adjustments Feed</span>
+          <span class="badge-subtle">Debounced 1/min</span>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-dim);">
+          Records SL and TP nudges, highlighting Breakeven shifts
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Timestamp (UTC)</th>
+              <th>Ticket</th>
+              <th>Symbol</th>
+              <th>Direction</th>
+              <th>Changed Fields</th>
+              <th>Adjustment Detail</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="updates-feed-tbody">
+            <tr>
+              <td colspan="7" class="empty-state">No stop/target modifications recorded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 3: CLOSED HISTORY -->
+    <div id="panel-closed" class="content-panel" style="display: none;">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>Closed Mirrored Trades</span>
+          <span class="badge-subtle" id="table-closed-count">0 closed</span>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-dim);">
+          All closed deals classified by MT5 reason with signed R outcomes
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Ticket</th>
+              <th>Symbol</th>
+              <th>Direction</th>
+              <th>Lot</th>
+              <th>Entry</th>
+              <th>Exit</th>
+              <th>Close Reason</th>
+              <th>Signed R</th>
+              <th>Closed (UTC)</th>
+              <th>Card</th>
+            </tr>
+          </thead>
+          <tbody id="closed-trades-tbody">
+            <tr>
+              <td colspan="10" class="empty-state">No closed trades recorded in this session.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Card Image Preview Modal -->
+  <div id="card-modal" class="modal-overlay" onclick="closeCardModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span style="font-weight: 700; font-size: 0.95rem;" id="modal-card-title">Trade Card Preview</span>
+        <button class="modal-close" onclick="closeCardModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-card-body">
+        <img id="modal-card-img" src="" alt="Card Loading..." />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let authToken = localStorage.getItem("mirror_token") || "";
+
+    function getHeaders() {
+      const h = { "Content-Type": "application/json" };
+      if (authToken) {
+        h["Authorization"] = "Bearer " + authToken;
+        h["X-Mirror-Password"] = authToken;
+      }
+      return h;
+    }
+
+    async function promptLogin() {
+      const pwd = prompt("Enter Mirror Dashboard Password:");
+      if (!pwd) return;
+      try {
+        const resp = await fetch("/api/v1/mirror/auth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: pwd })
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          authToken = data.token;
+          localStorage.setItem("mirror_token", authToken);
+          document.getElementById("auth-alert").style.display = "none";
+          fetchAllData();
+        } else {
+          alert("Invalid Mirror Dashboard Password");
+        }
+      } catch (e) {
+        alert("Authentication error: " + e.message);
+      }
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll(".nav-tab").forEach(b => b.classList.remove("active"));
+      document.getElementById("tab-" + tab + "-btn").classList.add("active");
+
+      document.getElementById("panel-positions").style.display = tab === "positions" ? "flex" : "none";
+      document.getElementById("panel-updates").style.display = tab === "updates" ? "flex" : "none";
+      document.getElementById("panel-closed").style.display = tab === "closed" ? "flex" : "none";
+    }
+
+    async function fetchAllData() {
+      try {
+        const headers = getHeaders();
+        const p1 = fetch("/api/v1/mirror/status", { headers }).then(r => r.ok ? r.json() : null).catch(() => null);
+        const p2 = fetch("/api/v1/mirror/trades/open", { headers }).then(r => r.ok ? r.json() : null).catch(() => null);
+        const p3 = fetch("/api/v1/mirror/trades/closed?limit=100", { headers }).then(r => r.ok ? r.json() : null).catch(() => null);
+
+        const [s, o, c] = await Promise.all([p1, p2, p3]);
+
+        if (s && s.data) renderStatus(s.data);
+        if (o && o.data) renderOpenTrades(o.data);
+        if (c && c.data) renderClosedTrades(c.data);
+
+        const timeEl = document.getElementById("last-poll-time");
+        if (timeEl) {
+          timeEl.innerText = new Date().toLocaleTimeString() + " (Auto 2s)";
+        }
+      } catch (err) {
+        console.warn("Polling error:", err);
+      }
+    }
+
+    function renderStatus(data) {
+      if (!data) return;
+      document.getElementById("count-open").innerText = data.open_positions_count || 0;
+      document.getElementById("table-open-count").innerText = (data.open_positions_count || 0) + " positions";
+      document.getElementById("count-updates").innerText = data.updates_logged_count || 0;
+      document.getElementById("count-closed").innerText = data.closed_trades_count || 0;
+      document.getElementById("table-closed-count").innerText = (data.closed_trades_count || 0) + " closed";
+
+      if (data.account_info) {
+        document.getElementById("acc-login-server").innerHTML =
+          `${data.account_info.login || 8058543} <span class="badge-subtle">${data.account_info.server || 'SCFMLimited-Demo2'}</span>`;
+      }
+      document.getElementById("last-poll-time").innerText = data.last_poll_time_utc ? (data.last_poll_time_utc.split("T")[1] || data.last_poll_time_utc) : "Live";
+    }
+
+    function getTradeDigits(t) {
+      if (t.digits !== undefined && t.digits !== null) return parseInt(t.digits);
+      const sym = (t.symbol || '').toUpperCase();
+      if (sym.includes('JPY')) return 3;
+      if (sym.includes('XAU') || sym.includes('GOLD')) return 2;
+      if (sym.includes('US30') || sym.includes('NAS100')) return 0;
+      return 5;
+    }
+
+    function renderOpenTrades(trades) {
+
+      const tbody = document.getElementById("open-positions-tbody");
+      if (!trades || trades.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" class="empty-state">No open positions. Watching terminal...</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = trades.map(t => {
+        const d = getTradeDigits(t);
+        const dirClass = (t.direction || t.type || "").toUpperCase() === "BUY" ? "dir-buy" : "dir-sell";
+        const lot = t.lot !== undefined && t.lot !== null ? parseFloat(t.lot).toFixed(2) : (t.volume ? parseFloat(t.volume).toFixed(2) : "0.10");
+        const slVal = t.stop_loss || t.sl;
+        const sl = (slVal && parseFloat(slVal) > 0) ? parseFloat(slVal).toFixed(d) : '<span class="badge-subtle">Open</span>';
+        const tpVal = t.take_profit || t.tp;
+        const tp = (tpVal && parseFloat(tpVal) > 0) ? parseFloat(tpVal).toFixed(d) : '<span class="badge-subtle">Open</span>';
+        const rr = (t.rr !== undefined && t.rr !== null && parseFloat(t.rr) > 0) ? `1:${parseFloat(t.rr).toFixed(2)}` : '<span class="badge-subtle">Dynamic</span>';
+
+        return `
+          <tr>
+            <td class="mono">#${t.ticket}</td>
+            <td class="mono" style="font-weight: 700;">${t.symbol}</td>
+            <td><span class="${dirClass}">${t.direction || t.type}</span></td>
+            <td class="mono" style="font-weight: 700; color: #38bdf8;">${lot}</td>
+            <td class="mono">${parseFloat(t.entry || t.open_price || 0).toFixed(d)}</td>
+            <td class="mono">${sl}</td>
+            <td class="mono">${tp}</td>
+            <td class="mono">${rr}</td>
+            <td class="mono" style="color: var(--text-dim);">${t.opened_utc || t.time || '-'}</td>
+            <td><span class="action-link" onclick="openCardModal('${t.ticket}', '${t.symbol}')">View Card</span></td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderClosedTrades(trades) {
+      const tbody = document.getElementById("closed-trades-tbody");
+      if (!trades || trades.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" class="empty-state">No closed trades recorded in this session.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = trades.map(t => {
+        const d = getTradeDigits(t);
+        const dirClass = (t.direction || t.type || "").toUpperCase() === "BUY" ? "dir-buy" : "dir-sell";
+        const reason = t.reason_name || t.barrier_hit || t.reason || "CLOSED MANUALLY";
+        let reasonBadge = `<span class="badge-manual">${reason}</span>`;
+        if (reason === "TARGET HIT" || reason.includes("TARGET")) reasonBadge = `<span class="badge-target-hit">🎯 TARGET HIT</span>`;
+        else if (reason === "STOP HIT" || reason.includes("STOP")) reasonBadge = `<span class="badge-stop-hit">🛑 STOP HIT</span>`;
+
+        let rDisplay = `<span style="color: var(--text-dim);">${t.r_status_note || (t.profit !== undefined && t.profit !== null ? `$${parseFloat(t.profit).toFixed(2)}` : 'Closed')}</span>`;
+        if (t.r_multiple !== null && t.r_multiple !== undefined) {
+          const rVal = parseFloat(t.r_multiple);
+          if (rVal >= 0) {
+            rDisplay = `<span class="r-pos">+${rVal.toFixed(2)} R</span>`;
+          } else {
+            rDisplay = `<span class="r-neg">${rVal.toFixed(2)} R</span>`;
+          }
+        }
+
+        return `
+          <tr>
+            <td class="mono">#${t.ticket}</td>
+            <td class="mono" style="font-weight: 700;">${t.symbol}</td>
+            <td><span class="${dirClass}">${t.direction || t.type}</span></td>
+            <td class="mono">${parseFloat(t.lot || t.volume || 0).toFixed(2)}</td>
+            <td class="mono">${parseFloat(t.entry || t.open_price || 0).toFixed(d)}</td>
+            <td class="mono">${parseFloat(t.exit_price || t.close_price || 0).toFixed(d)}</td>
+            <td>${reasonBadge}</td>
+            <td class="mono">${rDisplay}</td>
+            <td class="mono" style="color: var(--text-dim);">${t.closed_utc || t.time || '-'}</td>
+            <td><span class="action-link" onclick="openCardModal('${t.ticket}', '${t.symbol}')">Card</span></td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+
+    async function testOrderRefusal() {
+      try {
+        const resp = await fetch("/api/v1/mirror/order-check", {
+          method: "POST",
+          headers: getHeaders()
+        });
+        const data = await resp.json();
+        alert(JSON.stringify(data, null, 2));
+      } catch (err) {
+        alert("Order Refusal Verification:\n" + err.message);
+      }
+    }
+
+    function openCardModal(ticket, symbol) {
+      const modal = document.getElementById("card-modal");
+      const img = document.getElementById("modal-card-img");
+      const title = document.getElementById("modal-card-title");
+      title.innerText = `Trade #${ticket} (${symbol}) Card Preview`;
+      img.src = `/api/v1/mirror/trades/${ticket}/card?_t=` + Date.now();
+      modal.style.display = "flex";
+    }
+
+    function closeCardModal() {
+      document.getElementById("card-modal").style.display = "none";
+    }
+
+    // Initialize
+    if (!authToken) {
+      document.getElementById("auth-alert").style.display = "flex";
+    }
+    fetchAllData();
+    setInterval(fetchAllData, 2000);
+  </script>
+</body>
+</html>

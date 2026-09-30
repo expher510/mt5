@@ -1,0 +1,57 @@
+{
+  "opened_tickets": {},
+  "closed_tickets": {},
+  "active_positions": {},
+  "trade_history": [
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1000,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1001,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1002,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1003,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1004,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1005,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1006,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1007,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1008,
+      "event": "trade_opened"
+    },
+    {
+      "timestamp": 1789466868.67721,
+      "ticket": 1009,
+      "event": "trade_opened"
+    }
+  ]
+}

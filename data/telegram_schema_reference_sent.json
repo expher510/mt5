@@ -1,0 +1,25 @@
+{
+  "sent": true,
+  "sent_at": "2026-09-20T14:49:23.565799+00:00",
+  "is_dry_run": false,
+  "payload": {
+    "schema_version": 1,
+    "type": "schema_reference",
+    "is_reference": true,
+    "message_text": "FOREX ENGINEER — FORMAT REFERENCE (NOT A SIGNAL · DO NOT TRADE)\n\nFrom now on, every closed trade sends a message in this shape.\ntype = \"result\", schema_version = 1\n\n  symbol         EXAMPLE\n  direction      SELL\n  outcome        TP1          (one of: TP1, TP2, SL, TIMEOUT)\n  entry          000.000\n  exit_price     000.000\n  r_multiple     +2.0\n  opened_utc     2026-09-21 09:00:00\n  closed_utc     2026-09-21 10:30:00\n  duration       1h 30m\n  signal_id      snap_EXAMPLE_...\n\nRendered example:\n\n  FOREX ENGINEER — TRADE CLOSED\n  EXAMPLE · SELL · TARGET 1 HIT\n  Entry 000.000  ->  Exit 000.000\n  Result +2.0 R   Duration 1h 30m\n\n*** FORMAT REFERENCE ONLY — NOT A SIGNAL — DO NOT TRADE ***",
+    "example": {
+      "schema_version": 1,
+      "type": "result",
+      "signal_id": "snap_EXAMPLE_20260921_090000_000000",
+      "symbol": "EXAMPLE",
+      "direction": "SELL",
+      "outcome": "TP1",
+      "entry": 0.0,
+      "exit_price": 0.0,
+      "r_multiple": 2.0,
+      "opened_utc": "2026-09-21 09:00:00",
+      "closed_utc": "2026-09-21 10:30:00",
+      "duration": "1h 30m"
+    }
+  }
+}

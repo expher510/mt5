@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forex Engineer — Analyst Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --panel-bg: #0d121c;
+      --card-bg: #121826;
+      --border-color: #1e293b;
+      --border-focus: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --buy-green: #10b981;
+      --buy-green-bg: rgba(16, 185, 129, 0.15);
+      --buy-green-hover: #059669;
+      --sell-red: #ef4444;
+      --sell-red-bg: rgba(239, 68, 68, 0.15);
+      --sell-red-hover: #dc2626;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --gold-accent: #f59e0b;
+      --gold-bg: rgba(245, 158, 11, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    code, pre, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Top Bar */
+    header {
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .brand-sub {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .nav-tabs {
+      display: flex;
+      background: var(--card-bg);
+      padding: 0.25rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab.active {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--buy-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--buy-green);
+      box-shadow: 0 0 8px var(--buy-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Container */
+    main {
+      flex: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 1.5rem;
+    }
+
+    /* Alert / Banner */
+    .banner {
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.25rem;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .banner-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+    .banner-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    /* Desk Form Layout */
+    .desk-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .key-hint {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      font-weight: normal;
+      background: var(--card-bg);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Button Grid for Pairs */
+    .pair-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pair-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.6rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+
+    .pair-btn:hover {
+      border-color: #475569;
+      color: var(--text-main);
+    }
+
+    .pair-btn.active {
+      background: #1e3a8a;
+      border-color: #3b82f6;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    .pair-btn .num-hint {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    .pair-btn.active .num-hint {
+      color: #93c5fd;
+    }
+
+    /* Timeframe Selector */
+    .tf-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tf-btn {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.5rem 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tf-btn:hover {
+      border-color: #475569;
+      color: var(--text-main);
+    }
+
+    .tf-btn.active {
+      background: #334155;
+      border-color: #94a3b8;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Side Selector + Live Price Display */
+    .side-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      background: var(--card-bg);
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .side-btn {
+      border: 2px solid transparent;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+
+    .side-btn-buy {
+      background: var(--buy-green-bg);
+      color: var(--buy-green);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .side-btn-buy:hover {
+      background: rgba(16, 185, 129, 0.25);
+    }
+    .side-btn-buy.active {
+      background: var(--buy-green);
+      color: #000;
+      border-color: var(--buy-green);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .side-btn-sell {
+      background: var(--sell-red-bg);
+      color: var(--sell-red);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+    .side-btn-sell:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+    .side-btn-sell.active {
+      background: var(--sell-red);
+      color: #fff;
+      border-color: var(--sell-red);
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.4);
+    }
+
+    .live-price-box {
+      text-align: right;
+      padding-right: 0.5rem;
+    }
+    .live-price-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .live-price-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    /* Price Levels Form */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 140px;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .field-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-field {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 0.6rem 0.85rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .input-field:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    .field-metric {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: right;
+      padding-right: 0.25rem;
+    }
+    .field-metric.risk {
+      color: #fca5a5;
+    }
+    .field-metric.gain {
+      color: #6ee7b7;
+    }
+
+    /* Zones input */
+    .zone-row {
+      display: grid;
+      grid-template-columns: 110px 1fr auto 1fr 140px;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .zone-to {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    /* Why Text Area */
+    .why-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      margin-bottom: 1.5rem;
+    }
+
+    textarea.input-field {
+      resize: vertical;
+      min-height: 60px;
+      line-height: 1.4;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.9rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.15s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Open Trades Strip */
+    .open-strip {
+      margin-top: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .strip-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .open-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .open-trade-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .open-trade-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Reports Section */
+    .report-view {
+      display: none;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .report-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .report-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .data-table th {
+      text-align: right;
+      padding: 0.6rem 0.85rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-color);
+      text-transform: uppercase;
+      font-size: 0.725rem;
+      letter-spacing: 0.05em;
+    }
+
+    .data-table th:first-child {
+      text-align: left;
+    }
+
+    .data-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: right;
+    }
+
+    .data-table td:first-child {
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .data-table tr.thin-row {
+      opacity: 0.45;
+    }
+
+    .thin-badge {
+      font-size: 0.65rem;
+      background: #334155;
+      color: #94a3b8;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+    }
+
+    /* Auth Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-box {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-desc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="brand">
+      <span class="brand-badge">ANALYST</span>
+      <div>
+        <div class="brand-title">FOREX ENGINEER · ANALYST DESK</div>
+        <div class="brand-sub">Discretionary Trade Measurement & Intent Signature</div>
+      </div>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" id="tab-desk" onclick="switchView('desk')">
+        <span>⚡</span> Trade Desk
+      </button>
+      <button class="nav-tab" id="tab-report" onclick="switchView('report')">
+        <span>📊</span> Comparison & Signature
+      </button>
+    </div>
+
+    <div class="header-status">
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        <span id="bridge-status-text">BRIDGE LIVE</span>
+      </div>
+      <button onclick="promptAuth(true)" style="background:none; border:1px solid var(--border-color); color:var(--text-muted); padding:0.25rem 0.6rem; border-radius:4px; font-size:0.75rem; cursor:pointer;">
+        🔑 Auth
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div id="banner-container"></div>
+
+    <!-- VIEW 1: TRADE DESK FORM -->
+    <div id="view-desk">
+      <div class="desk-card">
+        <!-- PAIR BUTTONS (12 Pairs) -->
+        <div class="section-label">
+          <span>Currency Pair <span class="key-hint">Keys 1-9, 0, -, =</span></span>
+          <span class="mono" id="selected-pair-label" style="color:var(--accent-blue);">USDCHF</span>
+        </div>
+        <div class="pair-grid" id="pair-buttons">
+          <!-- 12 pairs rendered via JS -->
+        </div>
+
+        <!-- TIMEFRAME BUTTONS -->
+        <div class="section-label">
+          <span>Timeframe</span>
+          <span class="mono" id="selected-tf-label">M15</span>
+        </div>
+        <div class="tf-row" id="tf-buttons">
+          <button type="button" class="tf-btn" data-tf="M5" onclick="setTF('M5')">M5</button>
+          <button type="button" class="tf-btn active" data-tf="M15" onclick="setTF('M15')">M15</button>
+          <button type="button" class="tf-btn" data-tf="M30" onclick="setTF('M30')">M30</button>
+          <button type="button" class="tf-btn" data-tf="H1" onclick="setTF('H1')">H1</button>
+          <button type="button" class="tf-btn" data-tf="H4" onclick="setTF('H4')">H4</button>
+        </div>
+
+        <!-- SIDE BUTTONS & LIVE PRICE -->
+        <div class="side-row">
+          <button type="button" class="side-btn side-btn-buy active" id="btn-buy" onclick="setSide('BUY')">
+            <span>▲</span> BUY <span class="key-hint" style="font-size:0.65rem;">Alt+B</span>
+          </button>
+          <button type="button" class="side-btn side-btn-sell" id="btn-sell" onclick="setSide('SELL')">
+            <span>▼</span> SELL <span class="key-hint" style="font-size:0.65rem;">Alt+S</span>
+          </button>
+          <div class="live-price-box">
+            <div class="live-price-label">Live Bridge Price</div>
+            <div class="live-price-val mono" id="live-price-display">--.---</div>
+          </div>
+        </div>
+
+        <!-- PRICE LEVELS FORM -->
+        <form id="desk-form" onsubmit="handleFormSubmit(event)">
+          <div class="form-grid">
+            <div class="field-row">
+              <label class="field-label" for="inp-entry">Entry</label>
+              <div class="input-wrapper">
+                <input type="number" step="any" class="input-field mono" id="inp-entry" required oninput="recalcMetrics()" />
+              </div>
+              <div class="field-metric" id="metric-entry" style="font-size:0.75rem; color:var(--text-dim);">market</div>
+            </div>
+
+            <div class="field-row">
+              <label class="field-label" for="inp-stop">Stop</label>
+              <div class="input-wrapper">
+                <input type="number" step="any" class="input-field mono" id="inp-stop" required oninput="recalcMetrics()" />
+              </div>
+              <div class="field-metric risk mono" id="metric-risk">risk 0.00</div>
+            </div>
+
+            <div class="field-row">
+              <label class="field-label" for="inp-tp1">Target 1</label>
+              <div class="input-wrapper">
+                <input type="number" step="any" class="input-field mono" id="inp-tp1" required oninput="recalcMetrics()" />
+              </div>
+              <div class="field-metric gain mono" id="metric-tp1">-- R</div>
+            </div>
+
+            <div class="field-row">
+              <label class="field-label" for="inp-tp2">Target 2</label>
+              <div class="input-wrapper">
+                <input type="number" step="any" class="input-field mono" id="inp-tp2" oninput="recalcMetrics()" />
+              </div>
+              <div class="field-metric gain mono" id="metric-tp2">-- R</div>
+            </div>
+
+            <div class="field-row">
+              <label class="field-label" for="inp-tp3">Target 3</label>
+              <div class="input-wrapper">
+                <input type="number" step="any" class="input-field mono" id="inp-tp3" oninput="recalcMetrics()" />
+              </div>
+              <div class="field-metric gain mono" id="metric-tp3">-- R</div>
+            </div>
+
+            <div class="zone-row">
+              <label class="field-label">Zone</label>
+              <div class="input-wrapper">
+                <input type="number" step="any" class="input-field mono" id="inp-zone-low" placeholder="Low" />
+              </div>
+              <span class="zone-to">to</span>
+              <div class="input-wrapper">
+                <input type="number" step="any" class="input-field mono" id="inp-zone-high" placeholder="High" />
+              </div>
+              <div class="field-metric" style="color:var(--text-dim); font-size:0.75rem;">optional</div>
+            </div>
+
+            <div class="why-row">
+              <label class="field-label" for="inp-why">Why</label>
+              <div class="input-wrapper">
+                <textarea class="input-field" id="inp-why" placeholder="State what you are responding to (e.g. retest of the H4 zone that held twice)..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="btn-submit">
+            <span>💾</span> RECORD <span class="mono" style="opacity:0.8; font-size:0.9rem;">(Ctrl+Enter)</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- ACTIVE OPEN TRADES STRIP -->
+      <div class="open-strip">
+        <div class="strip-title">
+          <span>Active Open Manual Trades (<span id="open-count">0</span>)</span>
+          <span style="font-weight:normal; font-size:0.7rem; color:var(--text-dim);">Evaluated against live bar lows & highs (24h timeout)</span>
+        </div>
+        <div class="open-cards-grid" id="open-trades-container">
+          <div style="color:var(--text-dim); font-size:0.8rem;">No open manual trades right now.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: REPORTS & SIGNATURE -->
+    <div id="view-report" class="report-view">
+      <!-- 6a. The Comparison -->
+      <div class="report-card">
+        <div class="report-title">
+          <span>MANUAL vs MODEL</span>
+          <span style="font-size:0.8rem; font-weight:normal; color:var(--text-dim);">since 2026-09-21</span>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Strategy</th>
+              <th>Trades</th>
+              <th>Win %</th>
+              <th>E[R]</th>
+              <th>Total R</th>
+            </tr>
+          </thead>
+          <tbody id="comparison-tbody">
+            <tr><td colspan="5" style="text-align:center; color:var(--text-dim);">Loading comparison data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 6b. The Signature -->
+      <div class="report-card">
+        <div class="report-title">
+          <span>WHAT IS DIFFERENT ABOUT THE BARS HE PICKS</span>
+          <span style="font-size:0.8rem; font-weight:normal; color:var(--text-dim);" id="sig-subtitle">entries vs available</span>
+        </div>
+        <div style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;" id="thin-note">
+          Ranked by absolute Cohen's d. Greys out rows with fewer than 30 entries.
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Feature (91 Causal Indicators)</th>
+              <th>Cohen d</th>
+              <th>His Median</th>
+              <th>Available Median</th>
+            </tr>
+          </thead>
+          <tbody id="signature-tbody">
+            <tr><td colspan="4" style="text-align:center; color:var(--text-dim);">Loading signature table...</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Recent Trades with Why Text & Top 3 Signature Features -->
+        <div style="margin-top:2rem;">
+          <div class="section-label">10 Most Recent Manual Entries — Stated Intent vs Top Signature Discrepancy</div>
+          <div id="recent-why-container" style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.75rem;">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 6c. Zones -->
+      <div class="report-card">
+        <div class="report-title">
+          <span>DISCRETIONARY ZONES PERFORMANCE</span>
+          <span style="font-size:0.8rem; font-weight:normal; color:var(--text-dim);" id="zone-status-badge">COLLECTING</span>
+        </div>
+        <div id="zones-content" style="font-size:0.9rem; color:var(--text-muted);">
+          Loading zone data...
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Auth Modal -->
+  <div class="modal-backdrop" id="auth-modal">
+    <div class="modal-box">
+      <div class="modal-title">Analyst Desk Authentication</div>
+      <div class="modal-desc">Enter the shared analyst password to submit and track discretionary trades.</div>
+      <input type="password" class="input-field mono" id="auth-password-input" placeholder="Password" style="margin-bottom:1rem;" onkeydown="if(event.key==='Enter') submitAuth()" />
+      <button type="button" class="submit-btn" onclick="submitAuth()">Unlock Desk</button>
+    </div>
+  </div>
+
+  <script>
+    const PAIRS = [
+      "XAUUSD", "EURUSD", "GBPUSD", "USDJPY", "USDCHF", "USDCAD",
+      "AUDUSD", "AUDJPY", "CADJPY", "CHFJPY", "GBPJPY", "EURJPY"
+    ];
+
+    const PAIR_SHORTCUTS = {
+      "1": "XAUUSD", "2": "EURUSD", "3": "GBPUSD", "4": "USDJPY",
+      "5": "USDCHF", "6": "USDCAD", "7": "AUDUSD", "8": "AUDJPY",
+      "9": "CADJPY", "0": "CHFJPY", "-": "GBPJPY", "=": "EURJPY"
+    };
+
+    let currentPair = "USDCHF";
+    let currentTF = "M15";
+    let currentSide = "SELL";
+    let livePrices = {};
+    let authToken = localStorage.getItem("desk_auth_token") || "";
+
+    // Init on DOM ready
+    window.addEventListener("DOMContentLoaded", () => {
+      renderPairButtons();
+      setupKeyboardListeners();
+      fetchLivePrices();
+      fetchOpenTrades();
+      setInterval(fetchLivePrices, 3000);
+      setInterval(fetchOpenTrades, 5000);
+
+      // Check auth token
+      if (!authToken) {
+        promptAuth(true);
+      }
+    });
+
+    function promptAuth(show) {
+      const modal = document.getElementById("auth-modal");
+      modal.style.display = show ? "flex" : "none";
+      if (show) {
+        setTimeout(() => document.getElementById("auth-password-input").focus(), 100);
+      }
+    }
+
+    async function submitAuth() {
+      const pwd = document.getElementById("auth-password-input").value;
+      if (!pwd) return;
+      try {
+        const res = await fetch("/api/v1/desk/auth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: pwd })
+        });
+        if (res.ok) {
+          authToken = pwd;
+          localStorage.setItem("desk_auth_token", pwd);
+          document.cookie = `desk_auth_token=${encodeURIComponent(pwd)}; path=/; max-age=31536000`;
+          promptAuth(false);
+          showBanner("Authentication unlocked.", "success");
+          fetchLivePrices();
+        } else {
+          alert("Invalid analyst desk password.");
+        }
+      } catch (err) {
+        alert("Authentication failed: " + err);
+      }
+    }
+
+    function renderPairButtons() {
+      const container = document.getElementById("pair-buttons");
+      container.innerHTML = "";
+      PAIRS.forEach((p, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "pair-btn" + (p === currentPair ? " active" : "");
+        btn.id = "btn-pair-" + p;
+        btn.onclick = () => selectPair(p);
+
+        let keyHint = Object.keys(PAIR_SHORTCUTS).find(k => PAIR_SHORTCUTS[k] === p) || "";
+        btn.innerHTML = `${p} <span class="num-hint">${keyHint}</span>`;
+        container.appendChild(btn);
+      });
+    }
+
+    function selectPair(sym) {
+      currentPair = sym;
+      document.querySelectorAll(".pair-btn").forEach(b => b.classList.remove("active"));
+      const activeBtn = document.getElementById("btn-pair-" + sym);
+      if (activeBtn) activeBtn.classList.add("active");
+      document.getElementById("selected-pair-label").innerText = sym;
+
+      updateLivePriceDisplay();
+      prefillEntryPrice();
+      recalcMetrics();
+    }
+
+    function setTF(tf) {
+      currentTF = tf;
+      document.querySelectorAll(".tf-btn").forEach(b => b.classList.remove("active"));
+      const btn = document.querySelector(`.tf-btn[data-tf="${tf}"]`);
+      if (btn) btn.classList.add("active");
+      document.getElementById("selected-tf-label").innerText = tf;
+    }
+
+    function setSide(side) {
+      currentSide = side;
+      document.getElementById("btn-buy").classList.toggle("active", side === "BUY");
+      document.getElementById("btn-sell").classList.toggle("active", side === "SELL");
+      updateLivePriceDisplay();
+      prefillEntryPrice();
+      recalcMetrics();
+    }
+
+    async function fetchLivePrices() {
+      try {
+        const res = await fetch("/api/v1/desk/live-prices", {
+          headers: { "X-Desk-Password": authToken, "Authorization": "Bearer " + authToken }
+        });
+        if (res.status === 401) {
+          promptAuth(true);
+          return;
+        }
+        if (res.ok) {
+          const data = await res.json();
+          livePrices = data.symbols || {};
+          updateLivePriceDisplay();
+          // If entry is empty, prefill
+          const entryInp = document.getElementById("inp-entry");
+          if (!entryInp.value) {
+            prefillEntryPrice();
+          }
+        }
+      } catch (e) {
+        console.debug("Price fetch error:", e);
+      }
+    }
+
+    function updateLivePriceDisplay() {
+      const pData = livePrices[currentPair];
+      const disp = document.getElementById("live-price-display");
+      if (!pData) {
+        disp.innerText = "--.---";
+        return;
+      }
+      const val = currentSide === "BUY" ? pData.ask : pData.bid;
+      const digits = currentPair.includes("XAU") ? 2 : (currentPair.includes("JPY") ? 3 : 5);
+      disp.innerText = val ? Number(val).toFixed(digits) : "--.---";
+    }
+
+    function prefillEntryPrice() {
+      const pData = livePrices[currentPair];
+      if (!pData) return;
+      const val = currentSide === "BUY" ? pData.ask : pData.bid;
+      const digits = currentPair.includes("XAU") ? 2 : (currentPair.includes("JPY") ? 3 : 5);
+      if (val && val > 0) {
+        document.getElementById("inp-entry").value = Number(val).toFixed(digits);
+      }
+    }
+
+    function recalcMetrics() {
+      const entry = parseFloat(document.getElementById("inp-entry").value);
+      const stop = parseFloat(document.getElementById("inp-stop").value);
+      const tp1 = parseFloat(document.getElementById("inp-tp1").value);
+      const tp2 = parseFloat(document.getElementById("inp-tp2").value);
+      const tp3 = parseFloat(document.getElementById("inp-tp3").value);
+
+      const riskMetric = document.getElementById("metric-risk");
+      const tp1Metric = document.getElementById("metric-tp1");
+      const tp2Metric = document.getElementById("metric-tp2");
+      const tp3Metric = document.getElementById("metric-tp3");
+
+      if (!isNaN(entry) && !isNaN(stop) && entry > 0 && stop > 0) {
+        const risk = Math.abs(entry - stop);
+        const digits = currentPair.includes("XAU") ? 2 : (currentPair.includes("JPY") ? 3 : 5);
+        riskMetric.innerText = `risk ${risk.toFixed(digits)}`;
+
+        if (risk > 0) {
+          if (!isNaN(tp1) && tp1 > 0) {
+            const r1 = Math.abs(tp1 - entry) / risk;
+            tp1Metric.innerText = `${r1.toFixed(2)} R`;
+          } else {
+            tp1Metric.innerText = "-- R";
+          }
+
+          if (!isNaN(tp2) && tp2 > 0) {
+            const r2 = Math.abs(tp2 - entry) / risk;
+            tp2Metric.innerText = `${r2.toFixed(2)} R`;
+          } else {
+            tp2Metric.innerText = "-- R";
+          }
+
+          if (!isNaN(tp3) && tp3 > 0) {
+            const r3 = Math.abs(tp3 - entry) / risk;
+            tp3Metric.innerText = `${r3.toFixed(2)} R`;
+          } else {
+            tp3Metric.innerText = "-- R";
+          }
+        }
+      } else {
+        riskMetric.innerText = "risk 0.00";
+        tp1Metric.innerText = "-- R";
+        tp2Metric.innerText = "-- R";
+        tp3Metric.innerText = "-- R";
+      }
+    }
+
+    function setupKeyboardListeners() {
+      window.addEventListener("keydown", (e) => {
+        // Submit on Ctrl+Enter
+        if (e.ctrlKey && e.key === "Enter") {
+          e.preventDefault();
+          document.getElementById("desk-form").requestSubmit();
+          return;
+        }
+
+        // Check if inside an input or textarea
+        const activeTag = document.activeElement ? document.activeElement.tagName : "";
+        const isTyping = (activeTag === "INPUT" || activeTag === "TEXTAREA");
+
+        // Alt+B / Alt+S for Side
+        if (e.altKey && (e.key === "b" || e.key === "B")) {
+          e.preventDefault();
+          setSide("BUY");
+          return;
+        }
+        if (e.altKey && (e.key === "s" || e.key === "S")) {
+          e.preventDefault();
+          setSide("SELL");
+          return;
+        }
+
+        // Pair quick-selection keys (when not actively typing in a field)
+        if (!isTyping && PAIR_SHORTCUTS[e.key]) {
+          e.preventDefault();
+          selectPair(PAIR_SHORTCUTS[e.key]);
+        }
+      });
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const entry = parseFloat(document.getElementById("inp-entry").value);
+      const stop = parseFloat(document.getElementById("inp-stop").value);
+      const tp1 = parseFloat(document.getElementById("inp-tp1").value);
+      const tp2Val = document.getElementById("inp-tp2").value;
+      const tp3Val = document.getElementById("inp-tp3").value;
+      const zoneLowVal = document.getElementById("inp-zone-low").value;
+      const zoneHighVal = document.getElementById("inp-zone-high").value;
+      const why = document.getElementById("inp-why").value;
+
+      const payload = {
+        symbol: currentPair,
+        direction: currentSide,
+        timeframe: currentTF,
+        entry_price: entry,
+        stop_loss: stop,
+        take_profit_1: tp1,
+        take_profit_2: tp2Val ? parseFloat(tp2Val) : null,
+        take_profit_3: tp3Val ? parseFloat(tp3Val) : null,
+        zone_low: zoneLowVal ? parseFloat(zoneLowVal) : null,
+        zone_high: zoneHighVal ? parseFloat(zoneHighVal) : null,
+        why: why
+      };
+
+      try {
+        const res = await fetch("/api/v1/desk/trades", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Desk-Password": authToken,
+            "Authorization": "Bearer " + authToken
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          // Reject and preserve typed inputs
+          showBanner(data.detail || "Validation failed.", "error");
+          return;
+        }
+
+        // Success: Retain pair, timeframe, and side; clear prices and why box
+        showBanner(`Recorded ${data.trade.trade_id} (${currentPair} ${currentSide}). 91-feature snapshot saved.`, "success");
+        document.getElementById("inp-stop").value = "";
+        document.getElementById("inp-tp1").value = "";
+        document.getElementById("inp-tp2").value = "";
+        document.getElementById("inp-tp3").value = "";
+        document.getElementById("inp-zone-low").value = "";
+        document.getElementById("inp-zone-high").value = "";
+        document.getElementById("inp-why").value = "";
+        prefillEntryPrice();
+        recalcMetrics();
+        fetchOpenTrades();
+      } catch (err) {
+        showBanner("Submission error: " + err, "error");
+      }
+    }
+
+    async function fetchOpenTrades() {
+      try {
+        const res = await fetch("/api/v1/desk/trades", {
+          headers: { "X-Desk-Password": authToken, "Authorization": "Bearer " + authToken }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          renderOpenTrades(data.open_trades || []);
+        }
+      } catch (err) {
+        console.debug("Open trades error:", err);
+      }
+    }
+
+    function renderOpenTrades(trades) {
+      const container = document.getElementById("open-trades-container");
+      document.getElementById("open-count").innerText = trades.length;
+      if (!trades || trades.length === 0) {
+        container.innerHTML = `<div style="color:var(--text-dim); font-size:0.8rem;">No open manual trades right now.</div>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      trades.forEach(t => {
+        const card = document.createElement("div");
+        card.className = "open-trade-card";
+        const sideColor = t.direction === "BUY" ? "var(--buy-green)" : "var(--sell-red)";
+        card.innerHTML = `
+          <div class="open-trade-header">
+            <span style="font-weight:700; color:${sideColor};">${t.symbol} · ${t.direction}</span>
+            <span class="mono" style="font-size:0.7rem; color:var(--text-dim);">${t.trade_id.split('_').slice(-2).join('_')}</span>
+          </div>
+          <div class="mono" style="display:flex; justify-content:space-between; font-size:0.75rem;">
+            <span>Entry: ${t.entry}</span>
+            <span>SL: ${t.stop_loss}</span>
+            <span>TP1: ${t.take_profit_1}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-dim); margin-top:2px;">
+            <span>Entered: ${t.entered_at ? t.entered_at.replace('T', ' ').replace('Z', '') : ''}</span>
+            <span>${t.symbol_had_open_trade ? '⚡ Overlap' : '★ First'}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function showBanner(msg, type) {
+      const container = document.getElementById("banner-container");
+      container.innerHTML = `
+        <div class="banner banner-${type}">
+          <span>${msg}</span>
+          <button onclick="this.parentElement.remove()" style="background:none; border:none; color:inherit; cursor:pointer; font-weight:bold;">✕</button>
+        </div>
+      `;
+      if (type === "success") {
+        setTimeout(() => {
+          container.innerHTML = "";
+        }, 6000);
+      }
+    }
+
+    // Tab Navigation
+    function switchView(view) {
+      document.getElementById("tab-desk").classList.toggle("active", view === "desk");
+      document.getElementById("tab-report").classList.toggle("active", view === "report");
+      document.getElementById("view-desk").style.display = (view === "desk" ? "block" : "none");
+      document.getElementById("view-report").style.display = (view === "report" ? "flex" : "none");
+
+      if (view === "report") {
+        loadReportData();
+      }
+    }
+
+    async function loadReportData() {
+      // 1. Comparison Report
+      try {
+        const res1 = await fetch("/api/v1/desk/report/comparison", {
+          headers: { "X-Desk-Password": authToken, "Authorization": "Bearer " + authToken }
+        });
+        if (res1.ok) {
+          const d1 = await res1.json();
+          renderComparisonTable(d1.rows || []);
+        }
+      } catch (e) {
+        console.error("Comparison load error:", e);
+      }
+
+      // 2. Signature Report
+      try {
+        const res2 = await fetch("/api/v1/desk/report/signature", {
+          headers: { "X-Desk-Password": authToken, "Authorization": "Bearer " + authToken }
+        });
+        if (res2.ok) {
+          const d2 = await res2.json();
+          renderSignatureTable(d2);
+        }
+      } catch (e) {
+        console.error("Signature load error:", e);
+      }
+
+      // 3. Zones Report
+      try {
+        const res3 = await fetch("/api/v1/desk/report/zones", {
+          headers: { "X-Desk-Password": authToken, "Authorization": "Bearer " + authToken }
+        });
+        if (res3.ok) {
+          const d3 = await res3.json();
+          renderZonesReport(d3);
+        }
+      } catch (e) {
+        console.error("Zones load error:", e);
+      }
+    }
+
+    function renderComparisonTable(rows) {
+      const tbody = document.getElementById("comparison-tbody");
+      tbody.innerHTML = "";
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+        const expSign = r.expectancy_r > 0 ? "+" : "";
+        const totSign = r.total_r > 0 ? "+" : "";
+        const color = r.total_r > 0 ? "var(--buy-green)" : (r.total_r < 0 ? "var(--sell-red)" : "inherit");
+        tr.innerHTML = `
+          <td>${r.label}</td>
+          <td class="mono">${r.trades}</td>
+          <td class="mono">${r.win_pct.toFixed(1)}%</td>
+          <td class="mono" style="color:${color};">${expSign}${r.expectancy_r.toFixed(3)}</td>
+          <td class="mono" style="color:${color}; font-weight:700;">${totSign}${r.total_r.toFixed(1)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderSignatureTable(data) {
+      const subtitle = document.getElementById("sig-subtitle");
+      subtitle.innerText = `${data.his_entries_count} entries vs ${data.available_bars_count.toLocaleString()} available`;
+
+      if (data.thin_sample) {
+        document.getElementById("thin-note").innerHTML = `
+          <span style="color:#f59e0b; font-weight:600;">⚠️ ${data.thin_note}</span>
+        `;
+      }
+
+      const tbody = document.getElementById("signature-tbody");
+      tbody.innerHTML = "";
+      (data.features || []).forEach(f => {
+        const tr = document.createElement("tr");
+        if (f.thin) tr.className = "thin-row";
+        const sign = f.cohen_d > 0 ? "+" : "";
+        tr.innerHTML = `
+          <td>
+            ${f.feature}
+            ${f.thin ? '<span class="thin-badge">&lt;30 sample</span>' : ''}
+          </td>
+          <td class="mono" style="font-weight:700; color:${f.cohen_d > 0 ? '#93c5fd' : '#fca5a5'};">${sign}${f.cohen_d.toFixed(2)}</td>
+          <td class="mono">${f.his_median.toFixed(3)}</td>
+          <td class="mono">${f.avail_median.toFixed(3)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Render 10 recent Why entries
+      const whyContainer = document.getElementById("recent-why-container");
+      whyContainer.innerHTML = "";
+      const recent = data.recent_trades_with_why || [];
+      if (recent.length === 0) {
+        whyContainer.innerHTML = `<div style="color:var(--text-dim); font-size:0.8rem;">No trades recorded yet.</div>`;
+        return;
+      }
+
+      recent.forEach(t => {
+        const card = document.createElement("div");
+        card.style.background = "var(--card-bg)";
+        card.style.border = "1px solid var(--border-color)";
+        card.style.borderRadius = "6px";
+        card.style.padding = "0.75rem";
+        card.style.fontSize = "0.85rem";
+
+        const topPills = (t.top_features || []).map(feat => {
+          return `<span style="background:#1e293b; color:#93c5fd; padding:0.15rem 0.4rem; border-radius:4px; font-size:0.75rem; font-family:'JetBrains Mono';">${feat.feature} (z: ${feat.z_score > 0 ? '+' : ''}${feat.z_score})</span>`;
+        }).join(" ");
+
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem; font-size:0.75rem; color:var(--text-dim);">
+            <span style="font-weight:700; color:var(--text-main);">${t.symbol} · ${t.direction} (${t.entered_at})</span>
+            <span>${t.trade_id}</span>
+          </div>
+          <div style="font-style:italic; color:#e2e8f0; margin-bottom:0.5rem;">"${t.why || 'No explanation stated'}"</div>
+          <div style="display:flex; gap:0.4rem; align-items:center; flex-wrap:wrap;">
+            <span style="font-size:0.7rem; color:var(--text-dim);">Top Feature Discrepancies:</span>
+            ${topPills || '<span style="color:var(--text-dim); font-size:0.75rem;">None</span>'}
+          </div>
+        `;
+        whyContainer.appendChild(card);
+      });
+    }
+
+    function renderZonesReport(data) {
+      const badge = document.getElementById("zone-status-badge");
+      const content = document.getElementById("zones-content");
+      badge.innerText = data.status || "COLLECTING";
+
+      if (data.status === "COLLECTING") {
+        content.innerHTML = `
+          <div style="color:#f59e0b; margin-bottom:0.5rem; font-weight:600;">📊 ${data.message}</div>
+          <div style="background:#1e293b; border-radius:999px; height:8px; overflow:hidden; max-width:300px;">
+            <div style="background:#f59e0b; height:100%; width:${Math.min(100, (data.count / data.target) * 100)}%;"></div>
+          </div>
+        `;
+      } else {
+        content.innerHTML = `
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem; text-align:center;">
+            <div><div style="font-size:0.75rem; color:var(--text-dim);">Marked Zones</div><div class="mono" style="font-size:1.2rem; font-weight:700;">${data.total_marked_zones}</div></div>
+            <div><div style="font-size:0.75rem; color:var(--text-dim);">Win Rate</div><div class="mono" style="font-size:1.2rem; font-weight:700; color:var(--buy-green);">${data.win_rate}%</div></div>
+            <div><div style="font-size:0.75rem; color:var(--text-dim);">Expectancy R</div><div class="mono" style="font-size:1.2rem; font-weight:700;">${data.expectancy_r > 0 ? '+' : ''}${data.expectancy_r}</div></div>
+            <div><div style="font-size:0.75rem; color:var(--text-dim);">Total R</div><div class="mono" style="font-size:1.2rem; font-weight:700;">${data.total_r > 0 ? '+' : ''}${data.total_r}</div></div>
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

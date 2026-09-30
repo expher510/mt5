@@ -1,0 +1,32 @@
+{
+  "execution_mode": "AUTO_TRADING",
+  "trading_school": "TRI_SCHOOL_CONSENSUS",
+  "trading_style": "AUTO_ADAPTIVE",
+  "lot_mode": "FIXED_LOT",
+  "fixed_lot_size": 0.5,
+  "max_risk_percent": 1.0,
+  "active_symbols": [
+    "XAUUSD",
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "EURJPY",
+    "GBPJPY",
+    "AUDUSD",
+    "USDCAD",
+    "USDCHF",
+    "AUDJPY",
+    "CADJPY"
+  ],
+  "gold_execution_mode": "AUTO_TRADING",
+  "gold_strategy_profile": "HYBRID",
+  "gold_lot_mode": "DYNAMIC_PERCENT",
+  "gold_fixed_lot_size": 0.05,
+  "gold_scalp_lot_size": 0.05,
+  "gold_swing_lot_size": 0.03,
+  "gold_fast_be_enabled": true,
+  "gold_risk_percent": 1.0,
+  "closed_trades": [],
+  "starting_daily_equity": 0.0,
+  "last_baseline_date": "2026-09-24"
+}

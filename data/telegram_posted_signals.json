@@ -1,0 +1,1793 @@
+{
+  "posted_signals": {
+    "man_XAUUSD_20260921_122613_44524b": {
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:26:13Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122347_54347a": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:23:47Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122347_b0d0ec": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:23:47Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122347_4a11b6": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:23:47Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_122347_75b831": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:23:47Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_122347_8ba4c8": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:23:47Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_122348_440213": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T12:23:48Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122514_c1e526": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:14Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122515_a06d7e": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:15Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122515_f0331a": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:15Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_122515_1863c5": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:15Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_122515_1565ca": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:15Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_122516_433ace": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T12:25:16Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122535_951fa3": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:35Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122536_ceef21": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:36Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_122536_fcbdc4": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:36Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_122536_aa8d3f": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:36Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_122536_941bae": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T12:25:36Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_122537_a7989b": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T12:25:37Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_130203_3ffa1a": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:02:03Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_130203_11a8ac": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:02:03Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_130204_93b6f3": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:02:04Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_130204_b76728": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:02:04Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_130204_2a888c": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:02:04Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_130204_e387e6": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T13:02:04Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_135659_bff53d": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:56:59Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_135700_6ad5b5": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:57:00Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_135701_bc1de4": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T13:57:01Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_135702_f01332": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:57:02Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_135702_631577": {
+      "symbol": "AUDUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T13:57:02Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140047_3738cc": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:00:47Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140048_306b4e": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:00:48Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_140049_7b082c": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:00:49Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_140050_bdef15": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:00:50Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140050_8d8c61": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:00:50Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_140051_888b6a": {
+      "symbol": "AUDUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:00:51Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140134_1fba87": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:01:34Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140135_8ec8d4": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:01:35Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_140136_0490fc": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:01:36Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_140136_6a1eda": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:01:36Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140137_42069d": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:01:37Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_140138_b0180e": {
+      "symbol": "AUDUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:01:38Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140208_075ea4": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:02:08Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140309_b840d6": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:03:09Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140310_4bb6c5": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:03:10Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_140310_4e82aa": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:03:10Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_140311_799878": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:03:11Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_140311_5c27d2": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:03:11Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_140312_357b50": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:03:12Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144609_0f4594": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:09Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144610_726c6e": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:10Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_144610_ec52d4": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:46:10Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_144611_bd4f6e": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:46:11Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144611_49c30f": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:11Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_144612_cdbe2d": {
+      "symbol": "AUDUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:12Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144612_2002e1": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:12Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144613_2a3f3b": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:13Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144613_6753ef": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:13Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_144614_9de0a0": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:14Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_144614_999492": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:14Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_144615_a13739": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:46:15Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144659_2526fa": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:46:59Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144700_b5cd66": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:00Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_144701_cf1f82": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:47:01Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_USDJPY_20260921_144701_ec9e95": {
+      "symbol": "USDJPY",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:47:01Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144702_8e3dd1": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:02Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_144702_9f0626": {
+      "symbol": "AUDUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:02Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144703_fe9211": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:03Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144703_2f243e": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:03Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260921_144704_1c90c7": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:04Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_144704_6c6f04": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:04Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260921_144705_a78269": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-21T14:47:05Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260921_144705_50f0d4": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-21T14:47:05Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "snap_USDCAD_model_shadow_01": {
+      "symbol": "USDCAD",
+      "posted_at": "2026-09-24T06:53:09.371620+00:00",
+      "is_dry_run": false,
+      "is_test": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "signal",
+        "signal_id": "snap_USDCAD_model_shadow_01",
+        "symbol": "USDCAD",
+        "timeframe": "M15",
+        "direction": "BUY",
+        "time_utc": "2026-09-24 06:53:09",
+        "levels": {
+          "entry": 1.35,
+          "stop_loss": 1.345,
+          "take_profit_1": 1.355,
+          "take_profit_2": 1.3575,
+          "tp1_validated": true,
+          "tp2_validated": false
+        },
+        "model": {
+          "probability": 0.65,
+          "threshold": 0.4,
+          "gate": "H4 EMA20 > EMA50 > EMA200",
+          "gate_passed": true,
+          "atr": 0.0025,
+          "risk_reward": "1:2",
+          "baseline_expectancy_r": 0.0531,
+          "baseline_trades": 964,
+          "tier": "VALIDATED",
+          "folds_positive": 4,
+          "folds_total": 5,
+          "mode": "SHADOW",
+          "live_record_since": "2026-09-09"
+        },
+        "image_url": "https://bot.fxengen.com/api/v1/analyst/share/snap_USDCAD_model_shadow_01/image",
+        "message_1_text": "FOREX ENGINEER — CONFIRMED SIGNAL\n\nUSDCAD  ·  BUY  ·  M15\n\nEntry          1.35000\nStop Loss      1.34500\nTake Profit 1  1.35500\nTake Profit 2  1.35750\n\nSignal ID      snap_USDCAD_model_shadow_01\nTime            UTC",
+        "message_2_caption": "FOREX ENGINEER — ANALYSIS\n\nUSDCAD  ·  M15\n\nPair                USDCAD\nTimeframe           M15 (15-Minute Chart)\nModel probability   65%   (threshold 40%)\nH4 trend gate       PASSED  (EMA Trend Gate)\nATR                 0.00250\nRisk : Reward       1 : 2\nTier                VALIDATED\n\nBaseline: +0.05 R expectancy over 964 out-of-sample\nwalk-forward trades, spread accounted, slippage not modelled.\nTier: VALIDATED\n\nShadow mode — not auto-traded. Live record since 2026-09-09.\n\nTP1 is the validated target. TP2 is an extended runner and is not\ncovered by the baseline above."
+      }
+    },
+    "snap_USDCAD_model_shadow_1790232984145": {
+      "symbol": "USDCAD",
+      "posted_at": "2026-09-24T06:56:24.155105+00:00",
+      "is_dry_run": true,
+      "is_test": false,
+      "is_suppressed": true,
+      "suppressed_reason": "TELEGRAM_PUBLISH_MODEL_SIGNALS_FALSE"
+    },
+    "snap_USDCAD_model_shadow_1790233005441": {
+      "symbol": "USDCAD",
+      "posted_at": "2026-09-24T06:56:45.457533+00:00",
+      "is_dry_run": true,
+      "is_test": false,
+      "is_suppressed": true,
+      "suppressed_reason": "TELEGRAM_PUBLISH_MODEL_SIGNALS_FALSE"
+    },
+    "snap_USDCAD_model_shadow_1790237018024": {
+      "symbol": "USDCAD",
+      "posted_at": "2026-09-24T08:03:38.033696+00:00",
+      "is_dry_run": true,
+      "is_test": false,
+      "is_suppressed": true,
+      "suppressed_reason": "TELEGRAM_PUBLISH_MODEL_SIGNALS_FALSE"
+    },
+    "snap_USDCAD_model_shadow_1790250374635": {
+      "symbol": "USDCAD",
+      "posted_at": "2026-09-24T11:46:14.642062+00:00",
+      "is_dry_run": true,
+      "is_test": false,
+      "is_suppressed": true,
+      "suppressed_reason": "TELEGRAM_PUBLISH_MODEL_SIGNALS_FALSE"
+    },
+    "man_EURUSD_20260924_114615_47a5ef": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:46:15Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260924_114615_11ac74": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:46:15Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260924_114616_8092a8": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:46:16Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "snap_USDCAD_model_shadow_1790250426441": {
+      "symbol": "USDCAD",
+      "posted_at": "2026-09-24T11:47:06.448666+00:00",
+      "is_dry_run": true,
+      "is_test": false,
+      "is_suppressed": true,
+      "suppressed_reason": "TELEGRAM_PUBLISH_MODEL_SIGNALS_FALSE"
+    },
+    "man_EURUSD_20260924_114706_541db9": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:47:06Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260924_114707_f740b0": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:47:07Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260924_114708_65ac8c": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:47:08Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "snap_USDCAD_model_shadow_1790250505037": {
+      "symbol": "USDCAD",
+      "posted_at": "2026-09-24T11:48:25.046068+00:00",
+      "is_dry_run": true,
+      "is_test": false,
+      "is_suppressed": true,
+      "suppressed_reason": "TELEGRAM_PUBLISH_MODEL_SIGNALS_FALSE"
+    },
+    "man_EURUSD_20260924_114825_6bfee4": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:48:25Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260924_114826_bbdcb3": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:48:26Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_EURUSD_20260924_114826_7028db": {
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:48:26Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260924_114827_440e00": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:48:27Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_GBPUSD_20260924_114828_6da620": {
+      "symbol": "GBPUSD",
+      "direction": "BUY",
+      "posted_at": "2026-09-24T11:48:28Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    },
+    "man_AUDUSD_20260924_114828_40256b": {
+      "symbol": "AUDUSD",
+      "direction": "SELL",
+      "posted_at": "2026-09-24T11:48:28Z",
+      "is_dry_run": false,
+      "is_historical": true,
+      "sealed": true,
+      "source": "DESK"
+    }
+  },
+  "test_signals": {},
+  "test_signals_count": 0,
+  "signal_history": [
+    {
+      "timestamp": 1790232789.3716447,
+      "symbol": "USDCAD",
+      "snapshot_id": "snap_USDCAD_model_shadow_01"
+    }
+  ],
+  "notice_history": [
+    {
+      "timestamp": 1790547181.1054862,
+      "time_utc": "2026-09-27T22:13:01.105470+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-27 22:13:01",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 83,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 83 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790550781.2091308,
+      "time_utc": "2026-09-27T23:13:01.209107+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-27 23:13:01",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 84,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   H4 trend not aligned or probability below threshold\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 84 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790554381.4249408,
+      "time_utc": "2026-09-28T00:13:01.424917+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 00:13:01",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 85,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   H4 trend not aligned or probability below threshold\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 85 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790557981.568632,
+      "time_utc": "2026-09-28T01:13:01.568588+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 01:13:01",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 86,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   H4 trend not aligned or probability below threshold\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 86 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790561581.750291,
+      "time_utc": "2026-09-28T02:13:01.750268+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 02:13:01",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 87,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 87 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790565181.9033244,
+      "time_utc": "2026-09-28T03:13:01.903305+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 03:13:01",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 88,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 88 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790568782.140036,
+      "time_utc": "2026-09-28T04:13:02.140011+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 04:13:01",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 89,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 89 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790572382.3378637,
+      "time_utc": "2026-09-28T05:13:02.337839+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 05:13:02",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 90,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 90 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790575982.558687,
+      "time_utc": "2026-09-28T06:13:02.558665+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 06:13:02",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 91,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 91 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790579582.7794352,
+      "time_utc": "2026-09-28T07:13:02.779413+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 07:13:02",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 92,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 92 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790583183.247351,
+      "time_utc": "2026-09-28T08:13:03.247326+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 08:13:02",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 93,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 93 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790586783.419277,
+      "time_utc": "2026-09-28T09:13:03.419250+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 09:13:03",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 94,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 94 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790590383.6175394,
+      "time_utc": "2026-09-28T10:13:03.617517+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 10:13:03",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 95,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 95 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790593983.957864,
+      "time_utc": "2026-09-28T11:13:03.957837+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 11:13:03",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 96,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 96 hours ago\n2026-09-24 11:00 UTC"
+      }
+    },
+    {
+      "timestamp": 1790595793.3668475,
+      "time_utc": "2026-09-28T11:43:13.366837+00:00",
+      "is_dry_run": false,
+      "payload": {
+        "schema_version": 1,
+        "type": "waiting",
+        "time_utc": "2026-09-28 11:43:13",
+        "symbols": [
+          {
+            "symbol": "AUDJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "AUDUSD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CADJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "CHFJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "GBPJPY",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCAD",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDCHF",
+            "timeframe": "M15",
+            "reason": "market closed"
+          },
+          {
+            "symbol": "USDJPY",
+            "timeframe": "M15",
+            "reason": "H4 trend not aligned or probability below threshold"
+          }
+        ],
+        "last_signal": {
+          "symbol": "AUDUSD",
+          "timeframe": "M15",
+          "action": "BUY",
+          "price": 0.70291,
+          "age_hours": 97,
+          "time_utc": "2026-09-24 11:00:09 UTC"
+        },
+        "message_text": "FOREX ENGINEER — NO SIGNAL\n\nAUDJPY (M15)   waiting   market closed\nAUDUSD (M15)   waiting   market closed\nCADJPY (M15)   waiting   market closed\nCHFJPY (M15)   waiting   market closed\nGBPJPY (M15)   waiting   market closed\nUSDCAD (M15)   waiting   market closed\nUSDCHF (M15)   waiting   market closed\nUSDJPY (M15)   waiting   H4 trend not aligned or probability below threshold\n\nTimeframe: M15 (15-Minute Chart)\nDo not enter any trade. No confirmed setup at this time.\n\nLast confirmed signal: AUDUSD (M15), 97 hours ago\n2026-09-24 11:00 UTC"
+      }
+    }
+  ],
+  "last_signal_timestamp": 1790232789.3716447,
+  "last_signal_info": {
+    "symbol": "USDCAD",
+    "snapshot_id": "snap_USDCAD_model_shadow_01",
+    "time_utc": "2026-09-24 06:53:09"
+  },
+  "suppression_counts": {
+    "USDCAD": 1
+  }
+}

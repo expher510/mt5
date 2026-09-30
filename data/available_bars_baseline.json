@@ -1,0 +1,460 @@
+{
+  "total_available_bars": 23855,
+  "features": {
+    "f_ema20_dist": {
+      "mean": 0.05355,
+      "std": 1.29285,
+      "median": 0.06033
+    },
+    "f_ema50_dist": {
+      "mean": 0.14587,
+      "std": 2.19712,
+      "median": 0.20187
+    },
+    "f_ema200_dist": {
+      "mean": 0.39639,
+      "std": 5.28251,
+      "median": 0.64285
+    },
+    "f_ema20_50_gap": {
+      "mean": 0.09232,
+      "std": 1.2108,
+      "median": 0.14106
+    },
+    "f_ema50_200_gap": {
+      "mean": 0.25052,
+      "std": 3.91606,
+      "median": 0.48645
+    },
+    "f_ema_stack": {
+      "mean": 1.10463,
+      "std": 0.84317,
+      "median": 1.0
+    },
+    "f_rsi": {
+      "mean": 50.62549,
+      "std": 11.82345,
+      "median": 50.73669
+    },
+    "f_rsi_slope": {
+      "mean": -0.00491,
+      "std": 7.60069,
+      "median": 0.06955
+    },
+    "f_adx": {
+      "mean": 25.11481,
+      "std": 10.98438,
+      "median": 22.57846
+    },
+    "f_adx_slope": {
+      "mean": 0.00457,
+      "std": 2.941,
+      "median": -0.28853
+    },
+    "f_di_spread": {
+      "mean": -1.95923,
+      "std": 13.58223,
+      "median": -1.94511
+    },
+    "f_roc3": {
+      "mean": 0.01104,
+      "std": 1.08907,
+      "median": 0.02596
+    },
+    "f_roc6": {
+      "mean": 0.02865,
+      "std": 1.49348,
+      "median": 0.03278
+    },
+    "f_roc12": {
+      "mean": 0.06865,
+      "std": 2.08172,
+      "median": 0.06539
+    },
+    "f_roc24": {
+      "mean": 0.15289,
+      "std": 3.00525,
+      "median": 0.14118
+    },
+    "f_atr_pct": {
+      "mean": 0.06448,
+      "std": 0.05136,
+      "median": 0.04717
+    },
+    "f_atr_ratio": {
+      "mean": 0.99737,
+      "std": 0.27905,
+      "median": 0.93744
+    },
+    "f_bandwidth": {
+      "mean": 0.28382,
+      "std": 0.3081,
+      "median": 0.182
+    },
+    "f_bandwidth_pctile": {
+      "mean": 0.48378,
+      "std": 0.29874,
+      "median": 0.48
+    },
+    "f_tr_ratio": {
+      "mean": 0.98577,
+      "std": 0.54562,
+      "median": 0.8792
+    },
+    "f_body_ratio": {
+      "mean": 0.45777,
+      "std": 0.26595,
+      "median": 0.45455
+    },
+    "f_upper_wick": {
+      "mean": 0.26855,
+      "std": 0.2104,
+      "median": 0.22222
+    },
+    "f_lower_wick": {
+      "mean": 0.27368,
+      "std": 0.21565,
+      "median": 0.23077
+    },
+    "f_direction": {
+      "mean": 0.01362,
+      "std": 0.99265,
+      "median": 0.0
+    },
+    "f_range_pos24": {
+      "mean": 0.54679,
+      "std": 0.28606,
+      "median": 0.5678
+    },
+    "f_dist_high24": {
+      "mean": 2.30136,
+      "std": 1.76117,
+      "median": 1.93638
+    },
+    "f_dist_low24": {
+      "mean": 2.85136,
+      "std": 1.93175,
+      "median": 2.50105
+    },
+    "f_range_pos96": {
+      "mean": 0.56275,
+      "std": 0.29321,
+      "median": 0.61059
+    },
+    "f_dist_high96": {
+      "mean": 5.08682,
+      "std": 4.57767,
+      "median": 3.76677
+    },
+    "f_dist_low96": {
+      "mean": 6.54974,
+      "std": 4.67888,
+      "median": 5.67778
+    },
+    "f_spread_points": {
+      "mean": 2.09453,
+      "std": 10.79374,
+      "median": 0.0
+    },
+    "f_spread_atr": {
+      "mean": 0.02009,
+      "std": 0.13374,
+      "median": 0.0
+    },
+    "f_hour_sin": {
+      "mean": 0.00136,
+      "std": 0.70928,
+      "median": 0.0
+    },
+    "f_hour_cos": {
+      "mean": -0.00706,
+      "std": 0.70492,
+      "median": -0.0
+    },
+    "f_dow": {
+      "mean": 2.05093,
+      "std": 1.40032,
+      "median": 2.0
+    },
+    "f_sess_asia": {
+      "mean": 0.28895,
+      "std": 0.45329,
+      "median": 0.0
+    },
+    "f_sess_london": {
+      "mean": 0.21052,
+      "std": 0.40769,
+      "median": 0.0
+    },
+    "f_sess_ny": {
+      "mean": 0.37682,
+      "std": 0.4846,
+      "median": 0.0
+    },
+    "f_rv12": {
+      "mean": 0.00041,
+      "std": 0.00039,
+      "median": 0.00028
+    },
+    "f_rv48": {
+      "mean": 0.00044,
+      "std": 0.00037,
+      "median": 0.00031
+    },
+    "f_rv192": {
+      "mean": 0.00048,
+      "std": 0.00037,
+      "median": 0.00033
+    },
+    "f_vol_term_structure": {
+      "mean": 0.8849,
+      "std": 0.45133,
+      "median": 0.79173
+    },
+    "f_vol_of_vol": {
+      "mean": 0.37289,
+      "std": 0.25699,
+      "median": 0.2967
+    },
+    "f_vol_percentile": {
+      "mean": 0.4929,
+      "std": 0.30398,
+      "median": 0.47
+    },
+    "f_range_vs_typical": {
+      "mean": 1.19504,
+      "std": 0.92176,
+      "median": 1.00115
+    },
+    "f_narrowest_in_7": {
+      "mean": 0.17728,
+      "std": 0.38191,
+      "median": 0.0
+    },
+    "f_atr_expanding": {
+      "mean": 0.02718,
+      "std": 0.2782,
+      "median": -0.02708
+    },
+    "f_is_london_open": {
+      "mean": 0.08489,
+      "std": 0.27872,
+      "median": 0.0
+    },
+    "f_is_ny_open": {
+      "mean": 0.08506,
+      "std": 0.27897,
+      "median": 0.0
+    },
+    "f_is_overlap": {
+      "mean": 0.16818,
+      "std": 0.37404,
+      "median": 0.0
+    },
+    "f_is_asia_quiet": {
+      "mean": 0.32727,
+      "std": 0.46923,
+      "median": 0.0
+    },
+    "f_is_rollover": {
+      "mean": 0.0428,
+      "std": 0.20241,
+      "median": 0.0
+    },
+    "f_range_vs_hour_norm": {
+      "mean": 1.17441,
+      "std": 0.90667,
+      "median": 0.96875
+    },
+    "f_spread_vs_hour_norm": {
+      "mean": 84720184447.87192,
+      "std": 719122221752.09,
+      "median": 0.0
+    },
+    "f_is_month_turn": {
+      "mean": 0.16085,
+      "std": 0.3674,
+      "median": 0.0
+    },
+    "f_zret3": {
+      "mean": 0.00702,
+      "std": 0.98315,
+      "median": 0.01974
+    },
+    "f_zret6": {
+      "mean": 0.01211,
+      "std": 0.96101,
+      "median": 0.01747
+    },
+    "f_zret12": {
+      "mean": 0.01861,
+      "std": 0.95546,
+      "median": 0.02566
+    },
+    "f_mom96": {
+      "mean": 0.52431,
+      "std": 7.57073,
+      "median": 0.7433
+    },
+    "f_mom288": {
+      "mean": 0.50823,
+      "std": 8.83685,
+      "median": 1.35722
+    },
+    "f_mom960": {
+      "mean": 1.84863,
+      "std": 9.87902,
+      "median": 3.39345
+    },
+    "f_mom_consistency": {
+      "mean": 0.00906,
+      "std": 0.10527,
+      "median": 0.01144
+    },
+    "f_up_bar_share": {
+      "mean": 0.49767,
+      "std": 0.05199,
+      "median": 0.5
+    },
+    "f_dist_pdh": {
+      "mean": 5.27802,
+      "std": 6.57213,
+      "median": 4.38418
+    },
+    "f_dist_pdl": {
+      "mean": 7.15651,
+      "std": 7.2887,
+      "median": 6.47412
+    },
+    "f_dist_pdc": {
+      "mean": 0.07873,
+      "std": 4.66826,
+      "median": -0.02754
+    },
+    "f_pos_in_pdr": {
+      "mean": 0.54582,
+      "std": 0.62785,
+      "median": 0.60743
+    },
+    "f_dist_round": {
+      "mean": 0.42208,
+      "std": 0.36043,
+      "median": 0.33822
+    },
+    "f_vol_vs_hour_norm": {
+      "mean": 1.08089,
+      "std": 0.59683,
+      "median": 0.96415
+    },
+    "f_vol_trend": {
+      "mean": 0.99733,
+      "std": 0.46454,
+      "median": 0.94582
+    },
+    "f_move_per_volume": {
+      "mean": 0.00023,
+      "std": 0.00108,
+      "median": 3e-05
+    },
+    "f_move_per_volume_z": {
+      "mean": 0.00154,
+      "std": 1.02137,
+      "median": -0.17308
+    },
+    "f_fib_pos": {
+      "mean": 0.56275,
+      "std": 0.29321,
+      "median": 0.61059
+    },
+    "f_near_618": {
+      "mean": 0.0563,
+      "std": 0.2305,
+      "median": 0.0
+    },
+    "f_near_50": {
+      "mean": 0.04963,
+      "std": 0.21719,
+      "median": 0.0
+    },
+    "f_fvg_up": {
+      "mean": 0.03994,
+      "std": 0.17457,
+      "median": 0.0
+    },
+    "f_fvg_dn": {
+      "mean": 0.03887,
+      "std": 0.1816,
+      "median": 0.0
+    },
+    "f_swept_high": {
+      "mean": 0.0568,
+      "std": 0.23147,
+      "median": 0.0
+    },
+    "f_swept_low": {
+      "mean": 0.04322,
+      "std": 0.20336,
+      "median": 0.0
+    },
+    "h1_ema_stack": {
+      "mean": 1.11532,
+      "std": 0.83289,
+      "median": 1.0
+    },
+    "h1_ema20_dist": {
+      "mean": 0.07096,
+      "std": 1.39743,
+      "median": 0.15626
+    },
+    "h1_rsi": {
+      "mean": 50.87452,
+      "std": 13.12943,
+      "median": 51.46232
+    },
+    "h1_adx": {
+      "mean": 27.3266,
+      "std": 12.62435,
+      "median": 24.72836
+    },
+    "h1_di_spread": {
+      "mean": -3.95773,
+      "std": 14.85338,
+      "median": -3.41099
+    },
+    "h1_roc6": {
+      "mean": 0.04107,
+      "std": 1.52494,
+      "median": 0.07196
+    },
+    "h4_ema_stack": {
+      "mean": 1.03681,
+      "std": 0.85681,
+      "median": 1.0
+    },
+    "h4_ema20_dist": {
+      "mean": 0.01505,
+      "std": 1.55172,
+      "median": 0.15896
+    },
+    "h4_rsi": {
+      "mean": 50.61543,
+      "std": 14.28575,
+      "median": 51.98939
+    },
+    "h4_adx": {
+      "mean": 28.9924,
+      "std": 13.88866,
+      "median": 24.61798
+    },
+    "h4_di_spread": {
+      "mean": -4.58297,
+      "std": 16.41824,
+      "median": -3.20067
+    },
+    "h4_roc6": {
+      "mean": 0.02151,
+      "std": 1.74258,
+      "median": 0.14284
+    }
+  }
+}

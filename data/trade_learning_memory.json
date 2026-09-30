@@ -1,0 +1,679 @@
+{
+  "total_trades_analyzed": 90,
+  "total_losses_diagnosed": 46,
+  "total_wins_recorded": 44,
+  "win_rate_percent": 48.9,
+  "root_cause_counts": {
+    "CHOP_FALSE_BREAKOUT": 0,
+    "COUNTER_TREND_EXHAUSTION_FAIL": 0,
+    "TIGHT_SL_VOLATILITY_NOISE": 0,
+    "SPREAD_SLIPPAGE_DRAG": 0,
+    "PREMATURE_REVERSAL": 5,
+    "OTHER": 0
+  },
+  "model_weights": {
+    "MSS_BREAKOUT": 98.0,
+    "EMA_TREND_PULLBACK": 65.0,
+    "SMC_OB_RETEST": 65.0,
+    "FVG_IMBALANCE_FILL": 60.0,
+    "FIBO_OTE_0618": 60.0,
+    "LIQUIDITY_SWEEP": 75.0,
+    "TREND_MOMENTUM_EXPANSION": 70.0,
+    "BOLLINGER_REVERSION": 35.0
+  },
+  "model_penalties": {
+    "M5_BOLLINGER_REVERSION": 0.0,
+    "M5_EMA_PULLBACK": 0.0,
+    "M5_BREAKOUT_MOMENTUM": 0.0,
+    "M5_TURTLE_SOUP_SWEEP": 0.0,
+    "M5_FVG_TAP": 0.0,
+    "SWING_SMC_ORDERBLOCK": 0.0,
+    "SWING_FIBO_OTE": 0.0
+  },
+  "adaptive_adx_min": 20.0,
+  "adaptive_sl_multiplier": 1.15,
+  "adaptive_tp1_mult": 1.0,
+  "adaptive_tp2_mult": 1.0,
+  "adaptive_tp3_mult": 1.0,
+  "multi_target_split_enabled": true,
+  "recent_post_mortems": [
+    {
+      "ticket": 1010,
+      "symbol": "XAUUSD",
+      "profit": -5.0,
+      "direction": "BUY",
+      "closed_time": "2026-09-09 09:35:00 UTC",
+      "root_cause": "PREMATURE_REVERSAL",
+      "root_cause_ar": "فشل اختراق الزخم اللحظي وانعكاس السعر قبل استكمال الهيكل على XAUUSD",
+      "adaptation_action": "Applied 10-point penalty to Momentum breakout model.",
+      "adaptation_action_ar": "تم خفض وزن نموذج اختراق الزخم بـ 10 نقاط لتأكيد الدخول بإعادة الاختبار فقط.",
+      "adx_at_entry": 28.0,
+      "atr_at_entry": 4.0,
+      "sl_distance": 5.0,
+      "sl_pips": 50.0,
+      "models": [
+        "MSS_BREAKOUT",
+        "M5_BOLLINGER_REVERSION"
+      ]
+    },
+    {
+      "ticket": 1009,
+      "symbol": "XAUUSD",
+      "profit": -5.0,
+      "direction": "BUY",
+      "closed_time": "2026-09-09 09:35:00 UTC",
+      "root_cause": "PREMATURE_REVERSAL",
+      "root_cause_ar": "فشل اختراق الزخم اللحظي وانعكاس السعر قبل استكمال الهيكل على XAUUSD",
+      "adaptation_action": "Applied 10-point penalty to Momentum breakout model.",
+      "adaptation_action_ar": "تم خفض وزن نموذج اختراق الزخم بـ 10 نقاط لتأكيد الدخول بإعادة الاختبار فقط.",
+      "adx_at_entry": 28.0,
+      "atr_at_entry": 4.0,
+      "sl_distance": 5.0,
+      "sl_pips": 50.0,
+      "models": [
+        "MSS_BREAKOUT",
+        "M5_BOLLINGER_REVERSION"
+      ]
+    },
+    {
+      "ticket": 1008,
+      "symbol": "XAUUSD",
+      "profit": -5.0,
+      "direction": "BUY",
+      "closed_time": "2026-09-09 09:35:00 UTC",
+      "root_cause": "PREMATURE_REVERSAL",
+      "root_cause_ar": "فشل اختراق الزخم اللحظي وانعكاس السعر قبل استكمال الهيكل على XAUUSD",
+      "adaptation_action": "Applied 10-point penalty to Momentum breakout model.",
+      "adaptation_action_ar": "تم خفض وزن نموذج اختراق الزخم بـ 10 نقاط لتأكيد الدخول بإعادة الاختبار فقط.",
+      "adx_at_entry": 28.0,
+      "atr_at_entry": 4.0,
+      "sl_distance": 5.0,
+      "sl_pips": 50.0,
+      "models": [
+        "MSS_BREAKOUT",
+        "M5_BOLLINGER_REVERSION"
+      ]
+    },
+    {
+      "ticket": 1007,
+      "symbol": "XAUUSD",
+      "profit": -5.0,
+      "direction": "BUY",
+      "closed_time": "2026-09-09 09:35:00 UTC",
+      "root_cause": "PREMATURE_REVERSAL",
+      "root_cause_ar": "فشل اختراق الزخم اللحظي وانعكاس السعر قبل استكمال الهيكل على XAUUSD",
+      "adaptation_action": "Applied 10-point penalty to Momentum breakout model.",
+      "adaptation_action_ar": "تم خفض وزن نموذج اختراق الزخم بـ 10 نقاط لتأكيد الدخول بإعادة الاختبار فقط.",
+      "adx_at_entry": 28.0,
+      "atr_at_entry": 4.0,
+      "sl_distance": 5.0,
+      "sl_pips": 50.0,
+      "models": [
+        "MSS_BREAKOUT",
+        "M5_BOLLINGER_REVERSION"
+      ]
+    },
+    {
+      "ticket": 1006,
+      "symbol": "XAUUSD",
+      "profit": -5.0,
+      "direction": "BUY",
+      "closed_time": "2026-09-09 09:35:00 UTC",
+      "root_cause": "PREMATURE_REVERSAL",
+      "root_cause_ar": "فشل اختراق الزخم اللحظي وانعكاس السعر قبل استكمال الهيكل على XAUUSD",
+      "adaptation_action": "Applied 10-point penalty to Momentum breakout model.",
+      "adaptation_action_ar": "تم خفض وزن نموذج اختراق الزخم بـ 10 نقاط لتأكيد الدخول بإعادة الاختبار فقط.",
+      "adx_at_entry": 28.0,
+      "atr_at_entry": 4.0,
+      "sl_distance": 5.0,
+      "sl_pips": 50.0,
+      "models": [
+        "MSS_BREAKOUT",
+        "M5_BOLLINGER_REVERSION"
+      ]
+    }
+  ],
+  "recent_reinforcements": [
+    {
+      "ticket": 1020,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1019,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1018,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1017,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1016,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1015,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1014,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1013,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1012,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    },
+    {
+      "ticket": 1011,
+      "type": "REWARD",
+      "profit": 15.0,
+      "symbol": "XAUUSD",
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "time": "2026-09-09 09:35:00 UTC",
+      "note_ar": "صفقة رابحة على XAUUSD (+$15.00) -> مكافأة النماذج وتعزيز أوزانها في الذاكرة"
+    }
+  ],
+  "trade_ledger": [
+    {
+      "ticket": 1001,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:34:48.940790+00:00"
+    },
+    {
+      "ticket": 1002,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:34:48.946657+00:00"
+    },
+    {
+      "ticket": 1003,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:34:48.950841+00:00"
+    },
+    {
+      "ticket": 1004,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:34:48.954952+00:00"
+    },
+    {
+      "ticket": 1005,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:34:48.960345+00:00"
+    },
+    {
+      "ticket": 1001,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.512563+00:00"
+    },
+    {
+      "ticket": 1002,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.516846+00:00"
+    },
+    {
+      "ticket": 1003,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.520757+00:00"
+    },
+    {
+      "ticket": 1004,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.523944+00:00"
+    },
+    {
+      "ticket": 1005,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "EMA_TREND_PULLBACK",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.529120+00:00"
+    },
+    {
+      "ticket": 1006,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": -1.0,
+      "net_usd": -5.0,
+      "risk_usd": 5.0,
+      "models": [
+        "BOLLINGER_REVERSION",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.533553+00:00"
+    },
+    {
+      "ticket": 1007,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": -1.0,
+      "net_usd": -5.0,
+      "risk_usd": 5.0,
+      "models": [
+        "BOLLINGER_REVERSION",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.537707+00:00"
+    },
+    {
+      "ticket": 1008,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": -1.0,
+      "net_usd": -5.0,
+      "risk_usd": 5.0,
+      "models": [
+        "BOLLINGER_REVERSION",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.542670+00:00"
+    },
+    {
+      "ticket": 1009,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": -1.0,
+      "net_usd": -5.0,
+      "risk_usd": 5.0,
+      "models": [
+        "BOLLINGER_REVERSION",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.548305+00:00"
+    },
+    {
+      "ticket": 1010,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": -1.0,
+      "net_usd": -5.0,
+      "risk_usd": 5.0,
+      "models": [
+        "BOLLINGER_REVERSION",
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.554326+00:00"
+    },
+    {
+      "ticket": 1011,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.560668+00:00"
+    },
+    {
+      "ticket": 1012,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.567596+00:00"
+    },
+    {
+      "ticket": 1013,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.573945+00:00"
+    },
+    {
+      "ticket": 1014,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.580257+00:00"
+    },
+    {
+      "ticket": 1015,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.586512+00:00"
+    },
+    {
+      "ticket": 1016,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.593268+00:00"
+    },
+    {
+      "ticket": 1017,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.599501+00:00"
+    },
+    {
+      "ticket": 1018,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.606220+00:00"
+    },
+    {
+      "ticket": 1019,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.613765+00:00"
+    },
+    {
+      "ticket": 1020,
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "r": 3.0,
+      "net_usd": 15.0,
+      "risk_usd": 5.0,
+      "models": [
+        "MSS_BREAKOUT"
+      ],
+      "regime": "UNKNOWN",
+      "hour_utc": 0,
+      "adx": 28.0,
+      "closed_at": "2026-09-09T09:35:00.619915+00:00"
+    }
+  ],
+  "model_stats": {
+    "EMA_TREND_PULLBACK": {
+      "n": 10,
+      "wins": 10,
+      "sum_r": 30.0,
+      "disabled": false
+    },
+    "MSS_BREAKOUT": {
+      "n": 25,
+      "wins": 20,
+      "sum_r": 55.0,
+      "disabled": false
+    },
+    "BOLLINGER_REVERSION": {
+      "n": 5,
+      "wins": 0,
+      "sum_r": -5.0,
+      "disabled": false
+    }
+  },
+  "session_stats": {
+    "0": {
+      "n": 25,
+      "wins": 20,
+      "sum_r": 55.0
+    }
+  },
+  "regime_stats": {
+    "UNKNOWN": {
+      "n": 25,
+      "wins": 20,
+      "sum_r": 55.0
+    }
+  },
+  "overall_expectancy_r": 2.2,
+  "avg_win_r": 3.0,
+  "avg_loss_r": 1.0,
+  "payoff_ratio": 3.0,
+  "required_payoff_ratio": 0.25
+}
