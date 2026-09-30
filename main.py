@@ -2243,21 +2243,24 @@ async def sync_mirror_data(
     }
     """
     results = {}
+    acc_login = None
     if "account_info" in payload:
         acc = payload["account_info"]
         is_demo, reason = mirror_service.verify_account_is_demo(acc)
         if not is_demo:
             raise HTTPException(status_code=400, detail=f"Refusing live account: {reason}")
+        acc_login = acc.get("login")
         mirror_service.account_info = acc
         mirror_service.is_connected = True
-        if acc.get("login"):
-            mirror_service.login = acc["login"]
+        if acc_login:
+            mirror_service.login = acc_login
+            mirror_service.accounts[acc_login] = acc
         if acc.get("server"):
             mirror_service.server = acc["server"]
         results["account_verified"] = "DEMO"
 
     if "positions" in payload:
-        pos_res = mirror_service.process_positions_update(payload["positions"])
+        pos_res = mirror_service.process_positions_update(payload["positions"], account_login=acc_login)
         results["positions_processed"] = pos_res
 
     if "deals" in payload:
@@ -2265,8 +2268,8 @@ async def sync_mirror_data(
         results["deals_processed"] = deals_res
 
     if "closed_trades" in payload and isinstance(payload["closed_trades"], list):
-        mirror_service.closed_trades = payload["closed_trades"]
-        results["closed_trades_count"] = len(payload["closed_trades"])
+        mirror_service.merge_closed_trades(payload["closed_trades"], account_login=acc_login)
+        results["closed_trades_count"] = len(mirror_service.closed_trades)
 
     if "candles" in payload and isinstance(payload["candles"], dict):
         for sym, bars in payload["candles"].items():

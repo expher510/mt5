@@ -66,6 +66,7 @@ class MirrorService:
         self.is_connected = False
         self.is_demo = True
         self.account_info: Dict[str, Any] = {}
+        self.accounts: Dict[int, Dict[str, Any]] = {}
 
         # In-memory tracking
         self.open_positions: Dict[int, Dict[str, Any]] = {}
@@ -356,7 +357,8 @@ class MirrorService:
         self,
         current_positions: List[Dict[str, Any]],
         symbol_specs: Optional[Dict[str, Any]] = None,
-        now_ts: Optional[float] = None
+        now_ts: Optional[float] = None,
+        account_login: Optional[int] = None
     ) -> List[Dict[str, Any]]:
         """
         Section 5a & 5b:
@@ -420,7 +422,7 @@ class MirrorService:
                     "source": "MIRROR",
                     "ticket": ticket,
                     "symbol": sym,
-                    "account": pos.get("account") or self.account_info.get("login") or self.login,
+                    "account": pos.get("account") or account_login or self.account_info.get("login") or self.login,
                     "direction": direction,
                     "lot": round(lot, 2),
                     "entry": round(entry_price, digits),
@@ -534,13 +536,33 @@ class MirrorService:
                     else:
                         logger.info(f"⏱️ [MIRROR_UPDATE_DEBOUNCED] Suppressing rapid nudge for #{ticket} within 60s window.")
 
-        # Prune positions that are no longer open in MT5
-        closed_tickets = [t for t in self.open_positions if t not in active_tickets]
+        # Prune positions that are no longer open in MT5 for this account
+        if account_login:
+            closed_tickets = [
+                t for t, p in self.open_positions.items()
+                if (p.get("account") == account_login) and t not in active_tickets
+            ]
+        else:
+            closed_tickets = [t for t in self.open_positions if t not in active_tickets]
+
         for t in closed_tickets:
             self.open_positions.pop(t, None)
 
         self._save_state()
         return events
+
+    def merge_closed_trades(self, new_trades: List[Dict[str, Any]], account_login: Optional[int] = None):
+        """Merges historical closed trades across multiple MT5 accounts cleanly."""
+        existing_tickets = {int(t.get("ticket", 0)) for t in self.closed_trades if t.get("ticket")}
+        for t in new_trades:
+            ticket = int(t.get("ticket", 0))
+            if ticket and ticket not in existing_tickets:
+                if account_login and not t.get("account"):
+                    t["account"] = account_login
+                self.closed_trades.append(t)
+                existing_tickets.add(ticket)
+        # Sort newest first
+        self.closed_trades.sort(key=lambda x: str(x.get("time_close") or x.get("time") or ""), reverse=True)
 
     def process_closed_deals(
         self,
@@ -664,12 +686,23 @@ class MirrorService:
 
     def get_status(self) -> Dict[str, Any]:
         """Returns the current status of the mirrored watcher."""
+        accounts_list = []
+        if hasattr(self, "accounts") and self.accounts:
+            for acc_login, acc_data in self.accounts.items():
+                accounts_list.append({
+                    "login": acc_login,
+                    "server": acc_data.get("server", ""),
+                    "balance": acc_data.get("balance", 0.0),
+                    "equity": acc_data.get("equity", 0.0)
+                })
+
         return {
             "status": "ONLINE" if self.is_connected else "INITIALIZING",
             "account_login": self.account_info.get("login") or self.login,
             "server": self.account_info.get("server") or self.server,
             "balance": self.account_info.get("balance", 0.0),
             "equity": self.account_info.get("equity", 0.0),
+            "accounts_connected": accounts_list,
             "is_demo": self.is_demo,
             "read_only": True,
             "credential_type": "INVESTOR",
