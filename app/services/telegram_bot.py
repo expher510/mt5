@@ -1314,15 +1314,18 @@ class TelegramBotService:
             elif "forex" in t_lower:
                 return getattr(settings, "N8N_WEBHOOK_URL_FOREX", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_forex")
 
-        # 2. Check if the trade is from the Engineer's Gold Account (8058543)
+        # 2. Check if the trade is from the configured Gold Account or Forex Account
         acc = payload.get("account") or payload.get("login") or payload.get("account_login")
-        gold_login = getattr(settings, "MT5_MIRROR_LOGIN_GOLD", 8058543)
+        gold_login = getattr(settings, "MT5_MIRROR_LOGIN_GOLD", 0)
+        forex_login = getattr(settings, "MT5_MIRROR_LOGIN_FOREX", 0)
 
         if acc:
             try:
                 acc_int = int(acc)
-                if acc_int == gold_login:
-                    return getattr(settings, "N8N_WEBHOOK_URL_GOLD", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_gold")
+                if gold_login and acc_int == gold_login:
+                    return getattr(settings, "N8N_WEBHOOK_URL_GOLD", "")
+                elif forex_login and acc_int == forex_login:
+                    return getattr(settings, "N8N_WEBHOOK_URL_FOREX", "")
             except (ValueError, TypeError):
                 pass
 
@@ -1331,34 +1334,111 @@ class TelegramBotService:
         category = classify_market_category(sym)
 
         if category == "GOLD":
-            return getattr(settings, "N8N_WEBHOOK_URL_GOLD", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_gold")
+            return getattr(settings, "N8N_WEBHOOK_URL_GOLD", "")
         elif category == "INDEX":
-            return getattr(settings, "N8N_WEBHOOK_URL_INDEX", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_index")
+            return getattr(settings, "N8N_WEBHOOK_URL_INDEX", "")
         else:
-            return getattr(settings, "N8N_WEBHOOK_URL_FOREX", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_forex")
+            return getattr(settings, "N8N_WEBHOOK_URL_FOREX", "")
 
     # -------------------------------------------------------------------------
+    async def _dispatch_telegram_direct(self, payload: Dict[str, Any], category: str, acc_int: Optional[int]) -> bool:
+        """
+        Directly sends message to Telegram channels/groups via Telegram Bot API
+        without requiring an external webhook or n8n workflow.
+        Routes to TELEGRAM_CHAT_ID_GOLD for Gold or Account 1,
+        and TELEGRAM_CHAT_ID_FOREX for Forex or Account 2.
+        """
+        bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "").strip()
+        if not bot_token:
+            return False
+
+        gold_login = getattr(settings, "MT5_MIRROR_LOGIN_GOLD", 0)
+        forex_login = getattr(settings, "MT5_MIRROR_LOGIN_FOREX", 0)
+
+        chat_id = None
+        if acc_int and gold_login and acc_int == gold_login:
+            chat_id = getattr(settings, "TELEGRAM_CHAT_ID_GOLD", "")
+        elif acc_int and forex_login and acc_int == forex_login:
+            chat_id = getattr(settings, "TELEGRAM_CHAT_ID_FOREX", "")
+
+        if not chat_id:
+            if category == "GOLD":
+                chat_id = getattr(settings, "TELEGRAM_CHAT_ID_GOLD", "") or getattr(settings, "TELEGRAM_CHAT_ID_FOREX", "")
+            elif category == "INDEX":
+                chat_id = getattr(settings, "TELEGRAM_CHAT_ID_INDEX", "") or getattr(settings, "TELEGRAM_CHAT_ID_FOREX", "")
+            else:
+                chat_id = getattr(settings, "TELEGRAM_CHAT_ID_FOREX", "") or getattr(settings, "TELEGRAM_CHAT_ID_GOLD", "")
+
+        if not chat_id:
+            return False
+
+        msg_text = (
+            payload.get("message_text")
+            or payload.get("message_1_text")
+            or payload.get("text")
+            or str(payload.get("description", ""))
+        )
+        if not msg_text:
+            return False
+
+        url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+        data = {
+            "chat_id": chat_id,
+            "text": msg_text,
+            "disable_web_page_preview": True
+        }
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                res = await client.post(url, json=data)
+                if 200 <= res.status_code < 300:
+                    logger.info(f"✅ [DIRECT TELEGRAM DELIVERED] Dispatched to chat {chat_id} (Category: {category})")
+                    return True
+                else:
+                    logger.warning(f"⚠️ [DIRECT TELEGRAM ERROR] HTTP {res.status_code}: {res.text[:200]}")
+        except Exception as e:
+            logger.error(f"❌ [DIRECT TELEGRAM EXCEPTION] {e}")
+        return False
+
     async def _post_to_n8n_webhook(self, payload: Dict[str, Any]) -> bool:
         """
-        Dispatches JSON payload to n8n webhook with:
-          - 10 second timeout
-          - Up to 2 retries with exponential backoff (1s, 2s)
-          - Strict 2xx confirmation
+        Dispatches payload to direct Telegram Bot API and/or n8n webhook:
+          - Supports direct Telegram dispatch if TELEGRAM_BOT_TOKEN is set
+          - Supports n8n webhook dispatch with retry and confirmation
         """
+        sym = str(payload.get("symbol", ""))
+        cat = classify_market_category(sym)
+        acc = payload.get("account") or payload.get("login") or payload.get("account_login")
+        acc_int = None
+        if acc:
+            try:
+                acc_int = int(acc)
+            except (ValueError, TypeError):
+                pass
+
+        # 1. Direct Telegram API Dispatch (if bot token configured)
+        direct_ok = await self._dispatch_telegram_direct(payload, cat, acc_int)
+
+        # 2. Block if n8n integration is disabled
+        if not getattr(settings, "N8N_ENABLED", False):
+            if direct_ok:
+                return True
+            logger.info("ℹ️ [N8N DISABLED] Webhook dispatch disabled per user configuration.")
+            return True
+
         # Block any waiting payloads per user instruction
         if payload.get("type") == "waiting":
             logger.info("🚫 [BLOCKED] Waiting notice suppressed from n8n webhook per user instruction.")
             return True
 
         url = self.resolve_target_webhook(payload)
-        sym = str(payload.get("symbol", ""))
-        cat = classify_market_category(sym)
         logger.info(
-            f"🚀 [N8N ROUTING] Target: {url.split('/')[-1]} | Cat: {cat} | "
+            f"🚀 [N8N ROUTING] Target: {url.split('/')[-1] if url else 'NONE'} | Cat: {cat} | "
             f"Type: {payload.get('type')} | Sym: {sym} | "
             f"Acc: {payload.get('account') or 'N/A'}"
         )
         if not url:
+            if direct_ok:
+                return True
             logger.error("Telegram/n8n: Webhook URL could not be resolved.")
             return False
 

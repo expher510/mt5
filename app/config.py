@@ -66,13 +66,28 @@ class Settings(BaseSettings):
     GOLD_SESSION_END_UTC: int = 19    # NY liquidity fade (reference)
     GOLD_POST_LOSS_BLOCK_SECONDS: int = 900  # Same-direction re-entry block after a loss
     
-    # Telegram Integration via n8n Webhook & Safety Controls (Brief 10 & Brief 14)
-    N8N_WEBHOOK_URL: str = os.getenv("N8N_WEBHOOK_URL", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_forex")
-    N8N_WEBHOOK_URL_FOREX: str = os.getenv("N8N_WEBHOOK_URL_FOREX", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_forex")
-    N8N_WEBHOOK_URL_GOLD: str = os.getenv("N8N_WEBHOOK_URL_GOLD", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot")
-    N8N_WEBHOOK_URL_INDEX: str = os.getenv("N8N_WEBHOOK_URL_INDEX", "https://n8n-p4oh.srv1867849.hstgr.cloud/webhook/trading_bot_index")
+    # Telegram Integration via n8n Webhook, Direct Bot API & Safety Controls
+    N8N_ENABLED: bool = os.getenv("N8N_ENABLED", "false").lower() in ("true", "1", "yes")
+    N8N_WEBHOOK_URL: str = os.getenv("N8N_WEBHOOK_URL", "")
+    N8N_WEBHOOK_URL_FOREX: str = os.getenv("N8N_WEBHOOK_URL_FOREX", "")
+    N8N_WEBHOOK_URL_GOLD: str = os.getenv("N8N_WEBHOOK_URL_GOLD", "")
+    N8N_WEBHOOK_URL_INDEX: str = os.getenv("N8N_WEBHOOK_URL_INDEX", "")
+
+    # Direct Telegram Bot API (Optional alternative to n8n)
+    TELEGRAM_BOT_TOKEN: str = os.getenv("TELEGRAM_BOT_TOKEN", "")
+    TELEGRAM_CHAT_ID_GOLD: str = os.getenv("TELEGRAM_CHAT_ID_GOLD", "")
+    TELEGRAM_CHAT_ID_FOREX: str = os.getenv("TELEGRAM_CHAT_ID_FOREX", "")
+    TELEGRAM_CHAT_ID_INDEX: str = os.getenv("TELEGRAM_CHAT_ID_INDEX", "")
+
+    # Dual MT5 Accounts Configuration (Account 1: Gold, Account 2: Forex)
     MT5_MIRROR_LOGIN_GOLD: int = int(os.getenv("MT5_MIRROR_LOGIN_GOLD", "8058543"))
+    MT5_MIRROR_SERVER_GOLD: str = os.getenv("MT5_MIRROR_SERVER_GOLD", "SCFMLimited-Demo2")
+    MT5_MIRROR_INVESTOR_PASSWORD_GOLD: str = os.getenv("MT5_MIRROR_INVESTOR_PASSWORD_GOLD", "")
+
     MT5_MIRROR_LOGIN_FOREX: int = int(os.getenv("MT5_MIRROR_LOGIN_FOREX", "160767360"))
+    MT5_MIRROR_SERVER_FOREX: str = os.getenv("MT5_MIRROR_SERVER_FOREX", "SCFMLimited-Demo2")
+    MT5_MIRROR_INVESTOR_PASSWORD_FOREX: str = os.getenv("MT5_MIRROR_INVESTOR_PASSWORD_FOREX", "")
+
     MT5_MIRROR_LOGIN_SPLIT: int = int(os.getenv("MT5_MIRROR_LOGIN_SPLIT", "160767360"))
     TELEGRAM_DRY_RUN: bool = os.getenv("TELEGRAM_DRY_RUN", "false").lower() in ("true", "1", "yes")
     TELEGRAM_GLOBAL_MAX_HOURLY_SIGNALS: int = int(os.getenv("TELEGRAM_GLOBAL_MAX_HOURLY_SIGNALS", "25"))
@@ -81,15 +96,15 @@ class Settings(BaseSettings):
     TELEGRAM_HEARTBEAT_MINUTES: int = int(os.getenv("TELEGRAM_HEARTBEAT_MINUTES", "60"))
     TELEGRAM_MAX_HOURLY_NOTICES: int = 1
     TELEGRAM_ENABLE_WAITING_NOTICES: bool = os.getenv("TELEGRAM_ENABLE_WAITING_NOTICES", "false").lower() in ("true", "1", "yes")
-    # Trade Events Publishing Settings (Brief 19)
-    TELEGRAM_PUBLISH_TRADES: bool = os.getenv("TELEGRAM_PUBLISH_TRADES", "false").lower() in ("true", "1", "yes")
+    # Trade Events Publishing Settings
+    TELEGRAM_PUBLISH_TRADES: bool = os.getenv("TELEGRAM_PUBLISH_TRADES", "true").lower() in ("true", "1", "yes")
     TELEGRAM_MAX_HOURLY_TRADES: int = int(os.getenv("TELEGRAM_MAX_HOURLY_TRADES", "10"))
     TELEGRAM_MAX_DAILY_TRADES: int = int(os.getenv("TELEGRAM_MAX_DAILY_TRADES", "60"))
-    # Model Signals Publishing (Agent Brief 29 Section 2: models evaluate but Telegram send is suppressed)
-    TELEGRAM_PUBLISH_MODEL_SIGNALS: bool = os.getenv("TELEGRAM_PUBLISH_MODEL_SIGNALS", "false").lower() in ("true", "1", "yes")
-    # Analyst Desk Manual Trades Publishing (Agent Brief 30: enabled)
+    # Model Signals Publishing
+    TELEGRAM_PUBLISH_MODEL_SIGNALS: bool = os.getenv("TELEGRAM_PUBLISH_MODEL_SIGNALS", "true").lower() in ("true", "1", "yes")
+    # Analyst Desk Manual Trades Publishing
     TELEGRAM_PUBLISH_DESK: bool = os.getenv("TELEGRAM_PUBLISH_DESK", "true").lower() in ("true", "1", "yes")
-    # Signal Result Publishing Settings (Brief 23 & Brief 24)
+    # Signal Result Publishing Settings
     TELEGRAM_PUBLISH_RESULTS: bool = os.getenv("TELEGRAM_PUBLISH_RESULTS", "true").lower() in ("true", "1", "yes")
     TELEGRAM_REPORT_INTERVAL_HOURS: int = int(os.getenv("TELEGRAM_REPORT_INTERVAL_HOURS", "12"))
 
@@ -97,7 +112,7 @@ class Settings(BaseSettings):
         "AUDJPY", "AUDUSD", "CADJPY", "CHFJPY", "EURJPY", "EURUSD",
         "GBPJPY", "GBPUSD", "USDCAD", "USDCHF", "USDJPY", "XAUUSD"
     ]
-    TELEGRAM_EXCLUDED_SYMBOLS: list[str] = ["XAUUSD", "GBPUSD", "EURJPY", "EURUSD"]
+    TELEGRAM_EXCLUDED_SYMBOLS: list[str] = []
 
     @field_validator("TELEGRAM_ALLOWED_SYMBOLS", mode="before")
     @classmethod
@@ -120,6 +135,8 @@ class Settings(BaseSettings):
     @field_validator("TELEGRAM_EXCLUDED_SYMBOLS", mode="before")
     @classmethod
     def parse_excluded_symbols(cls, v):
+        if not v:
+            return []
         if isinstance(v, str):
             if v.startswith("[") and v.endswith("]"):
                 try:
@@ -130,7 +147,7 @@ class Settings(BaseSettings):
             return [s.strip().upper() for s in v.split(",") if s.strip()]
         if isinstance(v, list):
             return [str(s).strip().upper() for s in v]
-        return ["XAUUSD", "GBPUSD", "EURJPY", "EURUSD"]
+        return []
     # MT5 Communication & Security Tokens (Rotated & Hardened)
     MT5_BRIDGE_TOKEN: str = os.getenv("MT5_BRIDGE_TOKEN", "fx_bridge_sec_993427f1c84b")
     ADMIN_API_KEY: str = os.getenv("ADMIN_API_KEY", "fx_admin_sec_482910fae17c")
@@ -178,12 +195,13 @@ class Settings(BaseSettings):
     ANALYST_DESK_PASSWORD: str = os.getenv("ANALYST_DESK_PASSWORD", "fx_desk_sec_2026_99a8b")
 
     # Mirrored Account Settings (Agent Brief 32) - Read-Only Investor Watcher
-    MT5_MIRROR_LOGIN: int = int(os.getenv("MT5_MIRROR_LOGIN", "8058543"))
-    MT5_MIRROR_SERVER: str = os.getenv("MT5_MIRROR_SERVER", "SCFMLimited-Demo2")
+    MT5_MIRROR_LOGIN: int = int(os.getenv("MT5_MIRROR_LOGIN", "0"))
+    MT5_MIRROR_SERVER: str = os.getenv("MT5_MIRROR_SERVER", "")
     MT5_MIRROR_INVESTOR_PASSWORD: str = os.getenv("MT5_MIRROR_INVESTOR_PASSWORD", "")
+    MIRROR_ALLOW_LIVE: bool = os.getenv("MIRROR_ALLOW_LIVE", "true").lower() in ("true", "1", "yes")
     MIRROR_UI_PASSWORD: str = os.getenv("MIRROR_UI_PASSWORD", "fx_mirror_sec_2026_ab81c")
-    MIRROR_PUBLISH_TELEGRAM: bool = os.getenv("MIRROR_PUBLISH_TELEGRAM", "true").lower() in ("true", "1", "yes")
-    MIRROR_PUBLISH_GOLD: bool = os.getenv("MIRROR_PUBLISH_GOLD", "true").lower() in ("true", "1", "yes")
+    MIRROR_PUBLISH_TELEGRAM: bool = os.getenv("MIRROR_PUBLISH_TELEGRAM", "false").lower() in ("true", "1", "yes")
+    MIRROR_PUBLISH_GOLD: bool = os.getenv("MIRROR_PUBLISH_GOLD", "false").lower() in ("true", "1", "yes")
     
     class Config:
         case_sensitive = True

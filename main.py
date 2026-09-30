@@ -2249,6 +2249,11 @@ async def sync_mirror_data(
         if not is_demo:
             raise HTTPException(status_code=400, detail=f"Refusing live account: {reason}")
         mirror_service.account_info = acc
+        mirror_service.is_connected = True
+        if acc.get("login"):
+            mirror_service.login = acc["login"]
+        if acc.get("server"):
+            mirror_service.server = acc["server"]
         results["account_verified"] = "DEMO"
 
     if "positions" in payload:
@@ -2258,6 +2263,10 @@ async def sync_mirror_data(
     if "deals" in payload:
         deals_res = mirror_service.process_closed_deals(payload["deals"])
         results["deals_processed"] = deals_res
+
+    if "closed_trades" in payload and isinstance(payload["closed_trades"], list):
+        mirror_service.closed_trades = payload["closed_trades"]
+        results["closed_trades_count"] = len(payload["closed_trades"])
 
     if "candles" in payload and isinstance(payload["candles"], dict):
         for sym, bars in payload["candles"].items():
@@ -2276,6 +2285,76 @@ def mirror_order_check(_auth: str = Depends(verify_mirror_auth)):
         status_code=403,
         detail="Order execution REFUSED: Mirrored account connection is strictly READ-ONLY via investor password. Execution forbidden by architecture."
     )
+
+@app.post("/api/v1/mirror/clear")
+def clear_mirror_state(_auth: str = Depends(verify_mirror_auth)):
+    """Resets in-memory and on-disk mirror positions for switching to a new account."""
+    mirror_service.clear_all_memory()
+    return {"status": "SUCCESS", "message": "Mirrored positions cleared successfully."}
+
+class ManualOrderRequest(BaseModel):
+    symbol: str
+    direction: str
+    volume: float = 0.01
+    sl: Optional[float] = None
+    tp: Optional[float] = None
+    comment: str = "manual_order"
+
+class ManualCloseRequest(BaseModel):
+    ticket: int
+    volume: Optional[float] = None
+
+class ManualModifyRequest(BaseModel):
+    ticket: int
+    sl: Optional[float] = None
+    tp: Optional[float] = None
+
+@app.post("/api/v1/trade/manual/order")
+def manual_trade_order(req: ManualOrderRequest):
+    """Executes a manual BUY or SELL order directly via MT5BridgeEA."""
+    from mt5_bridge_sync import MT5BridgeSyncClient
+    client = MT5BridgeSyncClient()
+    res = client.open_order(
+        symbol=req.symbol,
+        order_type=req.direction,
+        volume=req.volume,
+        sl=req.sl,
+        tp=req.tp,
+        comment=req.comment
+    )
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("error_message", "Order failed"))
+    return {"status": "SUCCESS", "data": res.get("data", {})}
+
+@app.post("/api/v1/trade/manual/close")
+def manual_trade_close(req: ManualCloseRequest):
+    """Closes an open position by ticket via MT5BridgeEA."""
+    from mt5_bridge_sync import MT5BridgeSyncClient
+    client = MT5BridgeSyncClient()
+    res = client.close_position(ticket=req.ticket, volume=req.volume)
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("error_message", "Close failed"))
+    return {"status": "SUCCESS", "data": res.get("data", {})}
+
+@app.post("/api/v1/trade/manual/modify")
+def manual_trade_modify(req: ManualModifyRequest):
+    """Modifies SL / TP for an open position ticket via MT5BridgeEA."""
+    from mt5_bridge_sync import MT5BridgeSyncClient
+    client = MT5BridgeSyncClient()
+    res = client.modify_position(ticket=req.ticket, sl=req.sl, tp=req.tp)
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("error_message", "Modify failed"))
+    return {"status": "SUCCESS", "data": res.get("data", {})}
+
+@app.get("/api/v1/trade/manual/tick/{symbol}")
+def manual_trade_get_tick(symbol: str):
+    """Retrieves live Bid/Ask/Spread for a symbol via MT5BridgeEA."""
+    from mt5_bridge_sync import MT5BridgeSyncClient
+    client = MT5BridgeSyncClient()
+    res = client.send_request("GET_TICK", {"symbol": symbol.upper()})
+    if not res.get("success"):
+        raise HTTPException(status_code=400, detail=res.get("error_message", "Failed to get tick"))
+    return {"status": "SUCCESS", "data": res.get("data", {})}
 
 @app.get("/api/v1/history/trades-with-screens")
 def get_trades_with_screens(limit: int = Query(100)):

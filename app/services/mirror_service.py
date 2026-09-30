@@ -69,6 +69,7 @@ class MirrorService:
 
         # In-memory tracking
         self.open_positions: Dict[int, Dict[str, Any]] = {}
+        self.closed_trades: List[Dict[str, Any]] = []
         self.initial_risk_by_ticket: Dict[int, float] = {}
         self.published_signals: Set[int] = set()
         self.published_results: Set[int] = set()
@@ -145,6 +146,7 @@ class MirrorService:
         self.historical_seeded_open = 0
         self.historical_seeded_closed = 0
         self.first_connection_completed = False
+        self._save_state()
 
     def seed_historical_state(self, initial_positions: List[Dict[str, Any]], initial_deals: List[Dict[str, Any]]) -> Tuple[int, int]:
         """
@@ -208,6 +210,10 @@ class MirrorService:
                 tm = int(account_or_mode)
             except Exception:
                 tm = 0
+
+        allow_live = getattr(settings, "MIRROR_ALLOW_LIVE", True)
+        if allow_live:
+            return True, "Account accepted for read-only monitoring"
 
         # If server contains 'demo', it is confirmed a demo account regardless of broker internal trade_mode flags
         if "demo" in server or "demo" in str(self.server).lower():
@@ -528,6 +534,11 @@ class MirrorService:
                     else:
                         logger.info(f"⏱️ [MIRROR_UPDATE_DEBOUNCED] Suppressing rapid nudge for #{ticket} within 60s window.")
 
+        # Prune positions that are no longer open in MT5
+        closed_tickets = [t for t in self.open_positions if t not in active_tickets]
+        for t in closed_tickets:
+            self.open_positions.pop(t, None)
+
         self._save_state()
         return events
 
@@ -655,12 +666,15 @@ class MirrorService:
         """Returns the current status of the mirrored watcher."""
         return {
             "status": "ONLINE" if self.is_connected else "INITIALIZING",
-            "account_login": self.login,
-            "server": self.server,
+            "account_login": self.account_info.get("login") or self.login,
+            "server": self.account_info.get("server") or self.server,
+            "balance": self.account_info.get("balance", 0.0),
+            "equity": self.account_info.get("equity", 0.0),
             "is_demo": self.is_demo,
             "read_only": True,
             "credential_type": "INVESTOR",
             "open_positions_count": len(self.open_positions),
+            "closed_trades_count": len(self.closed_trades),
             "historical_seeded_open_count": self.historical_seeded_open,
             "historical_seeded_closed_count": self.historical_seeded_closed,
             "published_signals_count": len(self.published_signals),
@@ -673,8 +687,16 @@ class MirrorService:
         """Returns currently active open positions."""
         return list(self.open_positions.values())
 
-    def get_closed_trades(self, symbol: Optional[str] = None, limit: int = 50) -> List[Dict[str, Any]]:
-        """Returns resolved mirrored trades from disk, newest first."""
+    def get_closed_trades(self, symbol: Optional[str] = None, limit: int = 500) -> List[Dict[str, Any]]:
+        """Returns resolved mirrored trades from MT5 deals or disk, newest first."""
+        if self.closed_trades:
+            res = []
+            for rec in self.closed_trades:
+                if symbol and symbol.upper() != "ALL" and rec.get("symbol", "").upper() != symbol.upper():
+                    continue
+                res.append(rec)
+            return res[:limit]
+
         records = []
         if os.path.exists(self.outcomes_file):
             try:

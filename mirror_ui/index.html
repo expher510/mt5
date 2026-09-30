@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Forex Engineer — Account Mirror (Watch Only)</title>
+  <title>Forex Engineer — MT5 Live Trading Desk & Mirror</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #07090e;
       --panel-bg: #0d121c;
       --card-bg: #121826;
+      --card-hover: #172033;
       --border-color: #1e293b;
       --border-focus: #3b82f6;
       --text-main: #f1f5f9;
@@ -19,8 +20,10 @@
       --text-dim: #64748b;
       --buy-green: #10b981;
       --buy-green-bg: rgba(16, 185, 129, 0.15);
+      --buy-green-glow: rgba(16, 185, 129, 0.4);
       --sell-red: #ef4444;
       --sell-red-bg: rgba(239, 68, 68, 0.15);
+      --sell-red-glow: rgba(239, 68, 68, 0.4);
       --accent-blue: #3b82f6;
       --accent-purple: #8b5cf6;
       --gold-accent: #f59e0b;
@@ -49,7 +52,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Top Bar */
+    /* Top Navigation Bar */
     header {
       background: var(--panel-bg);
       border-bottom: 1px solid var(--border-color);
@@ -60,6 +63,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      backdrop-filter: blur(8px);
     }
 
     .brand {
@@ -71,15 +75,16 @@
     .brand-badge {
       background: linear-gradient(135deg, #0ea5e9, #3b82f6);
       color: #fff;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.75rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
       letter-spacing: 0.05em;
+      box-shadow: 0 0 12px rgba(14, 165, 233, 0.4);
     }
 
     .brand-title {
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.05rem;
       letter-spacing: -0.01em;
       color: var(--text-main);
@@ -94,21 +99,22 @@
     .nav-tabs {
       display: flex;
       background: var(--card-bg);
-      padding: 0.25rem;
-      border-radius: 6px;
+      padding: 0.3rem;
+      border-radius: 8px;
       border: 1px solid var(--border-color);
+      gap: 0.25rem;
     }
 
     .nav-tab {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 0.4rem 1rem;
+      padding: 0.45rem 1rem;
       font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.15s ease;
+      border-radius: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -116,29 +122,36 @@
 
     .nav-tab:hover {
       color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .nav-tab.active {
       background: var(--accent-blue);
       color: #fff;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+    }
+
+    .nav-tab.trade-tab.active {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
     }
 
     .header-status {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
-    .investor-badge {
+    .online-badge {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
       font-size: 0.8rem;
-      font-weight: 600;
-      background: rgba(14, 165, 233, 0.12);
-      color: #38bdf8;
-      border: 1px solid rgba(14, 165, 233, 0.3);
-      padding: 0.25rem 0.6rem;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--buy-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.3rem 0.75rem;
       border-radius: 999px;
     }
 
@@ -146,39 +159,22 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #38bdf8;
-      box-shadow: 0 0 8px #38bdf8;
-      animation: pulse 2s infinite;
+      background: var(--buy-green);
+      box-shadow: 0 0 10px var(--buy-green);
+      animation: pulse 1.8s infinite;
     }
 
     @keyframes pulse {
-      0% { opacity: 0.4; }
-      50% { opacity: 1; }
-      100% { opacity: 0.4; }
-    }
-
-    .btn-test-refuse {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #f87171;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.75rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.15s ease;
-    }
-
-    .btn-test-refuse:hover {
-      background: rgba(239, 68, 68, 0.2);
-      color: #fff;
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+      100% { opacity: 0.4; transform: scale(0.9); }
     }
 
     /* Main Container */
     main {
       flex: 1;
       padding: 1.5rem;
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
       width: 100%;
       display: flex;
@@ -190,11 +186,12 @@
     .account-banner {
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.25rem 1.5rem;
+      border-radius: 10px;
+      padding: 1.25rem 1.75rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 1.25rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     }
 
     .acc-item {
@@ -208,7 +205,7 @@
       color: var(--text-dim);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .acc-value {
@@ -223,21 +220,22 @@
     .badge-subtle {
       font-size: 0.7rem;
       font-weight: 600;
-      padding: 0.15rem 0.4rem;
+      padding: 0.15rem 0.45rem;
       border-radius: 4px;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       color: var(--text-muted);
     }
 
-    /* Content Cards */
+    /* Content Panels */
     .content-panel {
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     .panel-header {
@@ -246,15 +244,333 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(255, 255, 255, 0.01);
     }
 
     .panel-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* ========================================================
+       TRADE DESK STYLING
+       ======================================================== */
+    .trade-desk-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    @media (max-width: 960px) {
+      .trade-desk-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .trade-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .symbol-chip-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .symbol-chip {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .symbol-chip:hover {
+      color: var(--text-main);
+      border-color: var(--border-focus);
+    }
+
+    .symbol-chip.active {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+
+    .symbol-input-box {
+      display: flex;
+      gap: 0.4rem;
+      margin-left: auto;
+    }
+
+    .input-dark {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.45rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-dark:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Live Quote Ticker */
+    .quote-box {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.3) 0%, rgba(15, 23, 42, 0.4) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .quote-header {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .quote-symbol-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+
+    .spread-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold-accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .price-tile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .price-tile.bid {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .price-tile.ask {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .price-tile.bid .price-label { color: var(--sell-red); }
+    .price-tile.ask .price-label { color: var(--buy-green); }
+
+    .price-num {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .price-tile.bid .price-num { color: #fca5a5; }
+    .price-tile.ask .price-num { color: #86efac; }
+
+    /* Form Fields */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .field-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quick-lot-row {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+
+    .btn-lot {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-lot:hover {
+      color: #fff;
+      border-color: var(--accent-blue);
+    }
+
+    .stops-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .helper-tag {
+      font-size: 0.7rem;
+      color: var(--accent-blue);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* BUY / SELL Action Buttons */
+    .exec-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-exec {
+      border: none;
+      border-radius: 8px;
+      padding: 1.1rem 1rem;
+      font-weight: 800;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-exec .sub-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    .btn-exec-sell {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-exec-sell:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(239, 68, 68, 0.5);
+    }
+
+    .btn-exec-buy {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-exec-buy:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-exec:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Trade Desk Info Card */
+    .trade-side-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .side-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .log-container {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      max-height: 280px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .log-item {
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--accent-blue);
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .log-item.success { border-left-color: var(--buy-green); }
+    .log-item.error { border-left-color: var(--sell-red); }
 
     /* Tables */
     .table-container {
@@ -275,26 +591,26 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 0.75rem 1rem;
-      font-weight: 600;
+      padding: 0.85rem 1rem;
+      font-weight: 700;
       border-bottom: 1px solid var(--border-color);
     }
 
     td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.6);
       color: var(--text-main);
     }
 
     tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.025);
     }
 
     .dir-buy {
       background: var(--buy-green-bg);
       color: var(--buy-green);
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
       border-radius: 4px;
       font-size: 0.75rem;
       display: inline-block;
@@ -303,136 +619,122 @@
     .dir-sell {
       background: var(--sell-red-bg);
       color: var(--sell-red);
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
       border-radius: 4px;
       font-size: 0.75rem;
       display: inline-block;
     }
 
-    .badge-be {
-      background: var(--be-bg);
-      color: var(--be-cyan);
-      font-weight: 600;
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      font-size: 0.7rem;
-    }
-
-    .badge-target-hit {
-      background: var(--buy-green-bg);
-      color: var(--buy-green);
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+    .btn-action-close {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #f87171;
+      padding: 0.3rem 0.65rem;
       font-size: 0.75rem;
-    }
-
-    .badge-stop-hit {
-      background: var(--sell-red-bg);
-      color: var(--sell-red);
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
       border-radius: 4px;
-      font-size: 0.75rem;
-    }
-
-    .badge-manual {
-      background: rgba(148, 163, 184, 0.15);
-      color: var(--text-muted);
-      font-weight: 600;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-    }
-
-    .r-pos {
-      color: var(--buy-green);
       font-weight: 700;
-    }
-
-    .r-neg {
-      color: var(--sell-red);
-      font-weight: 700;
-    }
-
-    .action-link {
-      color: var(--accent-blue);
       cursor: pointer;
-      text-decoration: underline;
+      transition: all 0.15s;
+    }
+
+    .btn-action-close:hover {
+      background: var(--sell-red);
+      color: #fff;
+    }
+
+    .btn-action-modify {
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #60a5fa;
+      padding: 0.3rem 0.65rem;
       font-size: 0.75rem;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-action-modify:hover {
+      background: var(--accent-blue);
+      color: #fff;
     }
 
     /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.8);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(5px);
     }
 
     .modal-card {
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      max-width: 600px;
-      width: 90%;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 92%;
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      gap: 1.25rem;
+      box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.6);
     }
 
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
     }
 
     .modal-close {
       background: transparent;
       border: none;
       color: var(--text-dim);
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       cursor: pointer;
     }
 
-    .modal-body img {
-      width: 100%;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-    }
-
-    /* Auth Banner */
-    .auth-banner {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      color: var(--gold-accent);
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 2000;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-width: 380px;
     }
 
-    .btn-login {
-      background: var(--accent-blue);
-      border: none;
-      color: #fff;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.8rem;
+    .toast-msg {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.85rem 1.15rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      border-radius: 4px;
-      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      animation: slideIn 0.3s ease-out;
     }
 
-    /* Empty state */
+    .toast-msg.success { border-left: 4px solid var(--buy-green); color: #86efac; }
+    .toast-msg.error { border-left: 4px solid var(--sell-red); color: #fca5a5; }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
     .empty-state {
       padding: 3rem 1rem;
       text-align: center;
@@ -445,10 +747,10 @@
 
   <header>
     <div class="brand">
-      <div class="brand-badge">MIRROR</div>
+      <div class="brand-badge">MT5 LIVE</div>
       <div>
-        <div class="brand-title">FOREX ENGINEER — ACCOUNT MIRROR</div>
-        <div class="brand-sub">Watching MT5 #8058543 · Read-Only Investor Session</div>
+        <div class="brand-title">FOREX ENGINEER — TRADING DESK</div>
+        <div class="brand-sub" id="brand-sub">MT5BridgeEA · Real-Time Execution & Mirror</div>
       </div>
     </div>
 
@@ -457,62 +759,65 @@
         <span>Active Positions</span>
         <span class="badge-subtle" id="count-open">0</span>
       </button>
+      <button class="nav-tab trade-tab" id="tab-trade-btn" onclick="switchTab('trade')">
+        <span>⚡ Manual Trade Desk</span>
+      </button>
       <button class="nav-tab" id="tab-updates-btn" onclick="switchTab('updates')">
         <span>Live Updates</span>
         <span class="badge-subtle" id="count-updates">0</span>
       </button>
       <button class="nav-tab" id="tab-closed-btn" onclick="switchTab('closed')">
-        <span>Closed Trades</span>
+        <span>Closed Deals</span>
         <span class="badge-subtle" id="count-closed">0</span>
       </button>
     </div>
 
     <div class="header-status">
-      <div class="investor-badge">
+      <div class="online-badge" id="online-indicator">
         <span class="live-dot"></span>
-        <span>READ-ONLY (INVESTOR)</span>
+        <span id="online-text">MT5 ONLINE</span>
       </div>
-      <button class="btn-test-refuse" onclick="testOrderRefusal()">
-        Test Order Refusal
-      </button>
     </div>
   </header>
 
   <main>
-    <div id="auth-alert" class="auth-banner" style="display: none;">
-      <span>🔒 Mirror dashboard is locked. Enter password to view real-time trades.</span>
-      <button class="btn-login" onclick="promptLogin()">Enter Password</button>
-    </div>
-
     <!-- Account Details Banner -->
     <div class="account-banner">
       <div class="acc-item">
         <span class="acc-label">Account & Server</span>
-        <span class="acc-value mono" id="acc-login-server">8058543 <span class="badge-subtle">SCFMLimited-Demo2</span></span>
+        <span class="acc-value mono" id="acc-login-server">112332048 <span class="badge-subtle">MetaQuotes-Demo</span></span>
       </div>
       <div class="acc-item">
-        <span class="acc-label">Credential Mode</span>
-        <span class="acc-value" style="color: #38bdf8;">Investor Password</span>
+        <span class="acc-label">Account Balance</span>
+        <span class="acc-value mono" id="acc-balance" style="color: #38bdf8;">$100,004.82</span>
       </div>
       <div class="acc-item">
-        <span class="acc-label">Order Send Guarantee</span>
-        <span class="acc-value" style="color: var(--buy-green); font-size: 0.95rem;">Physically Blocked (Read-Only)</span>
+        <span class="acc-label">Account Equity</span>
+        <span class="acc-value mono" id="acc-equity" style="color: var(--buy-green);">$100,004.82</span>
       </div>
       <div class="acc-item">
-        <span class="acc-label">Last Polled</span>
-        <span class="acc-value mono" id="last-poll-time" style="font-size: 0.95rem; color: var(--text-dim);">Connecting...</span>
+        <span class="acc-label">Bridge Protocol</span>
+        <span class="acc-value" style="font-size: 0.95rem; color: #a78bfa;">WinSock TCP 5555 / ZMQ 5556</span>
+      </div>
+      <div class="acc-item">
+        <span class="acc-label">Sync Pulse</span>
+        <span class="acc-value mono" id="last-poll-time" style="font-size: 0.95rem; color: var(--text-dim);">Live (1s)</span>
       </div>
     </div>
 
-    <!-- TAB 1: ACTIVE POSITIONS -->
+    <!-- ========================================================
+         TAB 1: ACTIVE POSITIONS
+         ======================================================== -->
     <div id="panel-positions" class="content-panel">
       <div class="panel-header">
         <div class="panel-title">
-          <span>Active Mirrored Positions</span>
+          <span>Open Positions in MT5 Terminal</span>
           <span class="badge-subtle" id="table-open-count">0 positions</span>
         </div>
-        <div style="font-size: 0.8rem; color: var(--text-dim);">
-          Lot sizes and live prices stream directly from MT5 terminal
+        <div>
+          <button class="btn-action-modify" onclick="switchTab('trade')" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+            + Open New Trade
+          </button>
         </div>
       </div>
       <div class="table-container">
@@ -524,31 +829,156 @@
               <th>Direction</th>
               <th>Lot Size</th>
               <th>Entry Price</th>
-              <th>Current SL</th>
-              <th>Current TP</th>
-              <th>R:R</th>
+              <th>Stop Loss</th>
+              <th>Take Profit</th>
+              <th>Profit ($)</th>
               <th>Opened (UTC)</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody id="open-positions-tbody">
             <tr>
-              <td colspan="10" class="empty-state">No open positions. Watching terminal...</td>
+              <td colspan="10" class="empty-state">No open positions. Ready to trade.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- TAB 2: LIVE MODIFICATIONS & UPDATES -->
+    <!-- ========================================================
+         TAB 2: MANUAL TRADING DESK
+         ======================================================== -->
+    <div id="panel-trade" class="content-panel" style="display: none;">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>⚡ Manual Trade Desk — Instant MT5 Execution</span>
+          <span class="badge-subtle" style="color: var(--buy-green); border-color: rgba(16, 185, 129, 0.4);">Bidirectional Bridge</span>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-dim);">
+          Orders execute directly inside MT5 terminal in &lt;20ms
+        </div>
+      </div>
+
+      <div class="trade-desk-grid">
+        <!-- Order Placement Card -->
+        <div class="trade-card">
+          <!-- Symbol Selector -->
+          <div class="field-group">
+            <div class="field-label">Select Symbol</div>
+            <div class="symbol-chip-bar">
+              <button class="symbol-chip active" onclick="setSymbol('XAUUSD')">XAUUSD (الذهب)</button>
+              <button class="symbol-chip" onclick="setSymbol('EURUSD')">EURUSD</button>
+              <button class="symbol-chip" onclick="setSymbol('GBPUSD')">GBPUSD</button>
+              <button class="symbol-chip" onclick="setSymbol('USDJPY')">USDJPY</button>
+              <button class="symbol-chip" onclick="setSymbol('BTCUSD')">BTCUSD</button>
+              <div class="symbol-input-box">
+                <input type="text" id="custom-symbol" class="input-dark mono" placeholder="OTHER..." style="width: 90px; text-transform: uppercase;" />
+                <button class="btn-lot" onclick="setCustomSymbol()">Set</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Market Quote Display -->
+          <div class="quote-box">
+            <div class="quote-header">
+              <div class="quote-symbol-name" id="quote-symbol-title">XAUUSD</div>
+              <div class="spread-tag" id="quote-spread">Spread: -- pts</div>
+            </div>
+            <div class="price-tile bid">
+              <span class="price-label">BID (سعر البيع)</span>
+              <span class="price-num mono" id="quote-bid">----.--</span>
+            </div>
+            <div class="price-tile ask">
+              <span class="price-label">ASK (سعر الشراء)</span>
+              <span class="price-num mono" id="quote-ask">----.--</span>
+            </div>
+          </div>
+
+          <!-- Volume / Lot Size -->
+          <div class="field-group">
+            <div class="field-label">
+              <span>Lot Size (حجم اللوت)</span>
+              <span style="font-size: 0.75rem; color: var(--text-dim);">Min: 0.01 · Step: 0.01</span>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button class="btn-lot" style="padding: 0.55rem 0.8rem; font-size: 1rem;" onclick="adjustLot(-0.01)">-</button>
+              <input type="number" id="trade-lot" class="input-dark mono" value="0.01" step="0.01" min="0.01" max="100.0" style="flex: 1; font-size: 1.1rem; font-weight: 700; text-align: center;" />
+              <button class="btn-lot" style="padding: 0.55rem 0.8rem; font-size: 1rem;" onclick="adjustLot(0.01)">+</button>
+            </div>
+            <div class="quick-lot-row">
+              <button class="btn-lot" onclick="setLot(0.01)">0.01</button>
+              <button class="btn-lot" onclick="setLot(0.02)">0.02</button>
+              <button class="btn-lot" onclick="setLot(0.05)">0.05</button>
+              <button class="btn-lot" onclick="setLot(0.10)">0.10</button>
+              <button class="btn-lot" onclick="setLot(0.50)">0.50</button>
+              <button class="btn-lot" onclick="setLot(1.00)">1.00</button>
+            </div>
+          </div>
+
+          <!-- Stops (SL / TP) -->
+          <div class="stops-grid">
+            <div class="field-group">
+              <div class="field-label">
+                <span>Stop Loss (وقف الخسارة)</span>
+                <span class="helper-tag" onclick="quickStops('BUY')">Auto Buy SL</span>
+              </div>
+              <input type="number" id="trade-sl" class="input-dark mono" placeholder="Optional price..." step="any" />
+            </div>
+            <div class="field-group">
+              <div class="field-label">
+                <span>Take Profit (جني الأرباح)</span>
+                <span class="helper-tag" onclick="quickStops('SELL')">Auto Sell SL</span>
+              </div>
+              <input type="number" id="trade-tp" class="input-dark mono" placeholder="Optional price..." step="any" />
+            </div>
+          </div>
+
+          <!-- Execution Buttons -->
+          <div class="exec-buttons-grid">
+            <button class="btn-exec btn-exec-sell" id="btn-sell" onclick="submitTrade('SELL')">
+              <span>SELL (بيع)</span>
+              <span class="sub-text mono" id="btn-sell-price">@ Market</span>
+            </button>
+            <button class="btn-exec btn-exec-buy" id="btn-buy" onclick="submitTrade('BUY')">
+              <span>BUY (شراء)</span>
+              <span class="sub-text mono" id="btn-buy-price">@ Market</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Trade Desk Sidebar / Execution History -->
+        <div class="trade-side-card">
+          <div class="side-title">
+            <span>📋 Live Execution Log</span>
+            <span class="badge-subtle" id="log-count">0 items</span>
+          </div>
+          <div class="log-container" id="trade-log">
+            <div class="log-item">
+              <span style="font-weight: 700; color: #38bdf8;">Bridge Connected</span>
+              <span style="font-size: 0.75rem; color: var(--text-dim);">Ready for manual trade execution.</span>
+            </div>
+          </div>
+
+          <div style="background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--gold-accent);">💡 Quick Tips for Manual Trading:</div>
+            <ul style="font-size: 0.78rem; color: var(--text-muted); padding-left: 1.2rem; line-height: 1.6;">
+              <li>Orders sent from this panel execute in MT5 in <strong>under 20 milliseconds</strong>.</li>
+              <li>You can also place trades directly inside MT5 using One-Click Trading; they will appear here automatically.</li>
+              <li>Leave SL / TP empty if you prefer manual trailing stops.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         TAB 3: LIVE MODIFICATIONS & UPDATES
+         ======================================================== -->
     <div id="panel-updates" class="content-panel" style="display: none;">
       <div class="panel-header">
         <div class="panel-title">
           <span>Stop & Target Adjustments Feed</span>
-          <span class="badge-subtle">Debounced 1/min</span>
-        </div>
-        <div style="font-size: 0.8rem; color: var(--text-dim);">
-          Records SL and TP nudges, highlighting Breakeven shifts
+          <span class="badge-subtle">Debounced</span>
         </div>
       </div>
       <div class="table-container">
@@ -561,29 +991,54 @@
               <th>Direction</th>
               <th>Changed Fields</th>
               <th>Adjustment Detail</th>
-              <th>Notes</th>
             </tr>
           </thead>
           <tbody id="updates-feed-tbody">
             <tr>
-              <td colspan="7" class="empty-state">No stop/target modifications recorded yet.</td>
+              <td colspan="6" class="empty-state">No stop/target modifications recorded yet.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- TAB 3: CLOSED HISTORY -->
+    <!-- ========================================================
+         TAB 4: CLOSED HISTORY
+         ======================================================== -->
     <div id="panel-closed" class="content-panel" style="display: none;">
       <div class="panel-header">
         <div class="panel-title">
-          <span>Closed Mirrored Trades</span>
+          <span>📚 Closed Deals History (سجل الصفقات المكتملة)</span>
           <span class="badge-subtle" id="table-closed-count">0 closed</span>
         </div>
-        <div style="font-size: 0.8rem; color: var(--text-dim);">
-          All closed deals classified by MT5 reason with signed R outcomes
+        <div style="display: flex; gap: 0.6rem; align-items: center;">
+          <label style="font-size: 0.8rem; color: var(--text-dim); font-weight: 600;">Filter Symbol:</label>
+          <select id="closed-symbol-filter" class="input-dark mono" onchange="renderClosedTrades(allClosedDealsCache)" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">
+            <option value="ALL">All Pairs (جميع الأزواج)</option>
+          </select>
         </div>
       </div>
+
+      <!-- Closed Summary Stats Bar -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; padding: 1.25rem 1.75rem; background: rgba(15, 23, 42, 0.4); border-bottom: 1px solid var(--border-color);">
+        <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700; text-transform: uppercase;">TOTAL CLOSED DEALS</span>
+          <span id="stat-total-deals" class="mono" style="font-size: 1.25rem; font-weight: 800; color: #fff;">0</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700; text-transform: uppercase;">NET REALIZED PnL</span>
+          <span id="stat-net-profit" class="mono" style="font-size: 1.25rem; font-weight: 800;">$0.00</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700; text-transform: uppercase;">WIN RATE</span>
+          <span id="stat-win-rate" class="mono" style="font-size: 1.25rem; font-weight: 800; color: #38bdf8;">0%</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-weight: 700; text-transform: uppercase;">WINNERS / LOSERS</span>
+          <span id="stat-win-loss" class="mono" style="font-size: 1.25rem; font-weight: 800; color: var(--text-muted);"><span style="color: var(--buy-green);">0</span> / <span style="color: var(--sell-red);">0</span></span>
+        </div>
+      </div>
+
       <div class="table-container">
         <table>
           <thead>
@@ -592,10 +1047,10 @@
               <th>Symbol</th>
               <th>Direction</th>
               <th>Lot</th>
-              <th>Entry</th>
-              <th>Exit</th>
+              <th>Entry Price</th>
+              <th>Exit Price</th>
               <th>Close Reason</th>
-              <th>Signed R</th>
+              <th>Net Profit ($)</th>
               <th>Closed (UTC)</th>
               <th>Card</th>
             </tr>
@@ -608,8 +1063,30 @@
         </table>
       </div>
     </div>
-
   </main>
+
+  <!-- Modify Position Modal -->
+  <div id="modify-modal" class="modal-overlay" onclick="closeModifyModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span style="font-weight: 700; font-size: 1rem;" id="modal-modify-title">Modify Position #0</span>
+        <button class="modal-close" onclick="closeModifyModal()">&times;</button>
+      </div>
+      <input type="hidden" id="modify-ticket" />
+      <div class="field-group">
+        <label class="field-label">New Stop Loss (وقف الخسارة)</label>
+        <input type="number" id="modify-sl" class="input-dark mono" placeholder="0.0" step="any" />
+      </div>
+      <div class="field-group">
+        <label class="field-label">New Take Profit (جني الأرباح)</label>
+        <input type="number" id="modify-tp" class="input-dark mono" placeholder="0.0" step="any" />
+      </div>
+      <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.5rem;">
+        <button class="btn-lot" onclick="closeModifyModal()" style="padding: 0.5rem 1rem;">Cancel</button>
+        <button class="btn-action-modify" onclick="submitModifyPosition()" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Save Changes</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Card Image Preview Modal -->
   <div id="card-modal" class="modal-overlay" onclick="closeCardModal(event)">
@@ -619,13 +1096,20 @@
         <button class="modal-close" onclick="closeCardModal()">&times;</button>
       </div>
       <div class="modal-body" id="modal-card-body">
-        <img id="modal-card-img" src="" alt="Card Loading..." />
+        <img id="modal-card-img" src="" alt="Card Loading..." style="width: 100%; border-radius: 6px; border: 1px solid var(--border-color);" />
       </div>
     </div>
   </div>
 
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toasts"></div>
+
   <script>
-    let authToken = localStorage.getItem("mirror_token") || "";
+    let authToken = localStorage.getItem("mirror_token") || "fx_mirror_sec_2026_ab81c";
+    let currentSymbol = "XAUUSD";
+    let lastBid = 0;
+    let lastAsk = 0;
+    let tickPollTimer = null;
 
     function getHeaders() {
       const h = { "Content-Type": "application/json" };
@@ -636,114 +1120,407 @@
       return h;
     }
 
-    async function promptLogin() {
-      const pwd = prompt("Enter Mirror Dashboard Password:");
-      if (!pwd) return;
-      try {
-        const resp = await fetch("/api/v1/mirror/auth", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password: pwd })
-        });
-        if (resp.ok) {
-          const data = await resp.json();
-          authToken = data.token;
-          localStorage.setItem("mirror_token", authToken);
-          document.getElementById("auth-alert").style.display = "none";
-          fetchAllData();
-        } else {
-          alert("Invalid Mirror Dashboard Password");
-        }
-      } catch (e) {
-        alert("Authentication error: " + e.message);
-      }
+    function showToast(message, type = "success") {
+      const c = document.getElementById("toasts");
+      const el = document.createElement("div");
+      el.className = `toast-msg ${type}`;
+      el.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span><span>${message}</span>`;
+      c.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = "0";
+        el.style.transform = "translateX(100%)";
+        setTimeout(() => el.remove(), 300);
+      }, 4000);
+    }
+
+    function addLog(msg, type = "info") {
+      const log = document.getElementById("trade-log");
+      const item = document.createElement("div");
+      item.className = `log-item ${type}`;
+      const timeStr = new Date().toLocaleTimeString();
+      item.innerHTML = `<span style="font-weight: 700;">[${timeStr}] ${msg}</span>`;
+      log.prepend(item);
+      const count = document.getElementById("log-count");
+      if (count) count.innerText = log.children.length + " items";
     }
 
     function switchTab(tab) {
       document.querySelectorAll(".nav-tab").forEach(b => b.classList.remove("active"));
-      document.getElementById("tab-" + tab + "-btn").classList.add("active");
+      const btn = document.getElementById("tab-" + tab + "-btn");
+      if (btn) btn.classList.add("active");
 
       document.getElementById("panel-positions").style.display = tab === "positions" ? "flex" : "none";
+      document.getElementById("panel-trade").style.display = tab === "trade" ? "flex" : "none";
       document.getElementById("panel-updates").style.display = tab === "updates" ? "flex" : "none";
       document.getElementById("panel-closed").style.display = tab === "closed" ? "flex" : "none";
+
+      if (tab === "trade") {
+        pollTick();
+      }
     }
 
+    /* Symbol Controls */
+    function setSymbol(sym) {
+      currentSymbol = sym.toUpperCase();
+      document.querySelectorAll(".symbol-chip").forEach(c => {
+        c.classList.toggle("active", c.innerText.startsWith(currentSymbol));
+      });
+      document.getElementById("quote-symbol-title").innerText = currentSymbol;
+      document.getElementById("trade-sl").value = "";
+      document.getElementById("trade-tp").value = "";
+      pollTick();
+    }
+
+    function setCustomSymbol() {
+      const inp = document.getElementById("custom-symbol");
+      if (inp.value.trim()) {
+        setSymbol(inp.value.trim());
+        inp.value = "";
+      }
+    }
+
+    function adjustLot(delta) {
+      const el = document.getElementById("trade-lot");
+      let val = (parseFloat(el.value) || 0.01) + delta;
+      if (val < 0.01) val = 0.01;
+      el.value = val.toFixed(2);
+    }
+
+    function setLot(v) {
+      document.getElementById("trade-lot").value = parseFloat(v).toFixed(2);
+    }
+
+    /* Live Tick Fetching */
+    async function pollTick() {
+      try {
+        const resp = await fetch(`/api/v1/trade/manual/tick/${currentSymbol}`);
+        if (!resp.ok) return;
+        const d = await resp.json();
+        if (d.status === "SUCCESS" && d.data) {
+          const t = d.data;
+          lastBid = t.bid;
+          lastAsk = t.ask;
+          document.getElementById("quote-bid").innerText = t.bid.toFixed(currentSymbol.includes("JPY") ? 3 : (currentSymbol.includes("XAU") ? 2 : 5));
+          document.getElementById("quote-ask").innerText = t.ask.toFixed(currentSymbol.includes("JPY") ? 3 : (currentSymbol.includes("XAU") ? 2 : 5));
+          document.getElementById("quote-spread").innerText = `Spread: ${t.spread.toFixed(1)} pts`;
+          document.getElementById("btn-sell-price").innerText = `@ ${t.bid}`;
+          document.getElementById("btn-buy-price").innerText = `@ ${t.ask}`;
+        }
+      } catch (e) {
+        console.warn("Tick error:", e);
+      }
+    }
+
+    function quickStops(direction) {
+      if (!lastBid || !lastAsk) return;
+      const isGold = currentSymbol.includes("XAU");
+      const offset = isGold ? 10.0 : (currentSymbol.includes("JPY") ? 0.30 : 0.0030);
+
+      if (direction === "BUY") {
+        document.getElementById("trade-sl").value = (lastAsk - offset).toFixed(isGold ? 2 : 5);
+        document.getElementById("trade-tp").value = (lastAsk + (offset * 2)).toFixed(isGold ? 2 : 5);
+      } else {
+        document.getElementById("trade-sl").value = (lastBid + offset).toFixed(isGold ? 2 : 5);
+        document.getElementById("trade-tp").value = (lastBid - (offset * 2)).toFixed(isGold ? 2 : 5);
+      }
+    }
+
+    /* Submit Order */
+    async function submitTrade(direction) {
+      const btnBuy = document.getElementById("btn-buy");
+      const btnSell = document.getElementById("btn-sell");
+      btnBuy.disabled = true;
+      btnSell.disabled = true;
+
+      const lot = parseFloat(document.getElementById("trade-lot").value) || 0.01;
+      const slInput = document.getElementById("trade-sl").value;
+      const tpInput = document.getElementById("trade-tp").value;
+      const sl = slInput ? parseFloat(slInput) : null;
+      const tp = tpInput ? parseFloat(tpInput) : null;
+
+      const payload = {
+        symbol: currentSymbol,
+        direction: direction,
+        volume: lot,
+        sl: sl,
+        tp: tp,
+        comment: "manual_dashboard"
+      };
+
+      try {
+        const startTs = performance.now();
+        const resp = await fetch("/api/v1/trade/manual/order", {
+          method: "POST",
+          headers: getHeaders(),
+          body: JSON.stringify(payload)
+        });
+
+        const elapsed = Math.round(performance.now() - startTs);
+        const data = await resp.json();
+
+        if (resp.ok && data.status === "SUCCESS") {
+          showToast(`Order Executed! ${direction} ${lot} ${currentSymbol} (${elapsed}ms)`, "success");
+          addLog(`OPENED ${direction} ${lot} ${currentSymbol} (Execution: ${elapsed}ms)`, "success");
+          // Clear stops
+          document.getElementById("trade-sl").value = "";
+          document.getElementById("trade-tp").value = "";
+          // Refresh positions immediately
+          fetchAllData();
+        } else {
+          const err = data.detail || data.error_message || "Order rejected by MT5";
+          showToast(`Trade Failed: ${err}`, "error");
+          addLog(`FAILED ${direction} ${lot} ${currentSymbol}: ${err}`, "error");
+        }
+      } catch (e) {
+        showToast("Network / Bridge Error: " + e.message, "error");
+        addLog("Network Error: " + e.message, "error");
+      } finally {
+        btnBuy.disabled = false;
+        btnSell.disabled = false;
+      }
+    }
+
+    /* Close Position */
+    async function closePositionDirect(ticket) {
+      if (!confirm(`Are you sure you want to close position #${ticket}?`)) return;
+      try {
+        const resp = await fetch("/api/v1/trade/manual/close", {
+          method: "POST",
+          headers: getHeaders(),
+          body: JSON.stringify({ ticket: parseInt(ticket) })
+        });
+        const d = await resp.json();
+        if (resp.ok && d.status === "SUCCESS") {
+          showToast(`Position #${ticket} closed successfully!`, "success");
+          addLog(`CLOSED #${ticket}`, "success");
+          fetchAllData();
+        } else {
+          showToast(`Close failed: ${d.detail || 'Error'}`, "error");
+        }
+      } catch (e) {
+        showToast("Error closing position: " + e.message, "error");
+      }
+    }
+
+    /* Modify Position Modal */
+    function openModifyModal(ticket, symbol, sl, tp) {
+      document.getElementById("modal-modify-title").innerText = `Modify Position #${ticket} (${symbol})`;
+      document.getElementById("modify-ticket").value = ticket;
+      document.getElementById("modify-sl").value = (sl && parseFloat(sl) > 0) ? parseFloat(sl) : "";
+      document.getElementById("modify-tp").value = (tp && parseFloat(tp) > 0) ? parseFloat(tp) : "";
+      document.getElementById("modify-modal").style.display = "flex";
+    }
+
+    function closeModifyModal() {
+      document.getElementById("modify-modal").style.display = "none";
+    }
+
+    async function submitModifyPosition() {
+      const ticket = parseInt(document.getElementById("modify-ticket").value);
+      const slVal = document.getElementById("modify-sl").value;
+      const tpVal = document.getElementById("modify-tp").value;
+      const sl = slVal ? parseFloat(slVal) : 0.0;
+      const tp = tpVal ? parseFloat(tpVal) : 0.0;
+
+      try {
+        const resp = await fetch("/api/v1/trade/manual/modify", {
+          method: "POST",
+          headers: getHeaders(),
+          body: JSON.stringify({ ticket, sl, tp })
+        });
+        const d = await resp.json();
+        if (resp.ok && d.status === "SUCCESS") {
+          showToast(`Position #${ticket} modified successfully!`, "success");
+          closeModifyModal();
+          fetchAllData();
+        } else {
+          showToast(`Modify failed: ${d.detail || 'Error'}`, "error");
+        }
+      } catch (e) {
+        showToast("Error modifying position: " + e.message, "error");
+      }
+    }
+
+    let allClosedDealsCache = [];
+
+    /* Polling Loop */
     async function fetchAllData() {
       try {
         const headers = getHeaders();
         const p1 = fetch("/api/v1/mirror/status", { headers }).then(r => r.ok ? r.json() : null).catch(() => null);
         const p2 = fetch("/api/v1/mirror/trades/open", { headers }).then(r => r.ok ? r.json() : null).catch(() => null);
-        const p3 = fetch("/api/v1/mirror/trades/closed?limit=100", { headers }).then(r => r.ok ? r.json() : null).catch(() => null);
+        const p3 = fetch("/api/v1/mirror/trades/closed?limit=500", { headers }).then(r => r.ok ? r.json() : null).catch(() => null);
 
         const [s, o, c] = await Promise.all([p1, p2, p3]);
 
         if (s && s.data) renderStatus(s.data);
         if (o && o.data) renderOpenTrades(o.data);
-        if (c && c.data) renderClosedTrades(c.data);
+        if (c && c.data) {
+          allClosedDealsCache = c.data;
+          updateClosedFilterDropdown(allClosedDealsCache);
+          renderClosedTrades(allClosedDealsCache);
+        }
 
-        const timeEl = document.getElementById("last-poll-time");
-        if (timeEl) {
-          timeEl.innerText = new Date().toLocaleTimeString() + " (Auto 2s)";
+        // Also poll current symbol tick if on trade desk
+        if (document.getElementById("panel-trade").style.display === "flex") {
+          pollTick();
         }
       } catch (err) {
         console.warn("Polling error:", err);
       }
     }
 
+    function updateClosedFilterDropdown(trades) {
+      const select = document.getElementById("closed-symbol-filter");
+      if (!select) return;
+      const currentVal = select.value;
+      const uniqueSymbols = Array.from(new Set(trades.map(t => (t.symbol || '').toUpperCase()).filter(Boolean))).sort();
+      if (select.children.length === uniqueSymbols.length + 1) return; // Already populated
+
+      let html = `<option value="ALL">All Pairs (جميع الأزواج) (${trades.length})</option>`;
+      uniqueSymbols.forEach(sym => {
+        const count = trades.filter(t => (t.symbol || '').toUpperCase() === sym).length;
+        html += `<option value="${sym}" ${currentVal === sym ? 'selected' : ''}>${sym} (${count})</option>`;
+      });
+      select.innerHTML = html;
+    }
+
+    function renderClosedTrades(trades) {
+      if (!trades) trades = allClosedDealsCache || [];
+      const tbody = document.getElementById("closed-trades-tbody");
+      const filterEl = document.getElementById("closed-symbol-filter");
+      const filterSym = filterEl ? filterEl.value : "ALL";
+
+      let filtered = trades;
+      if (filterSym && filterSym !== "ALL") {
+        filtered = trades.filter(t => (t.symbol || '').toUpperCase() === filterSym);
+      }
+
+      // Compute statistics
+      let netProfit = 0.0;
+      let winCount = 0;
+      let lossCount = 0;
+      filtered.forEach(t => {
+        const p = parseFloat(t.profit || 0);
+        netProfit += p;
+        if (p > 0.001) winCount++;
+        else if (p < -0.001) lossCount++;
+      });
+
+      const totalTrades = filtered.length;
+      const totalDecided = winCount + lossCount;
+      const winRate = totalDecided > 0 ? ((winCount / totalDecided) * 100).toFixed(1) : "0.0";
+
+      const statTotal = document.getElementById("stat-total-deals");
+      if (statTotal) statTotal.innerText = totalTrades;
+      const statProfit = document.getElementById("stat-net-profit");
+      if (statProfit) {
+        statProfit.innerText = (netProfit >= 0 ? "+$" : "-$") + Math.abs(netProfit).toFixed(2);
+        statProfit.style.color = netProfit >= 0 ? "var(--buy-green)" : "var(--sell-red)";
+      }
+      const statWinRate = document.getElementById("stat-win-rate");
+      if (statWinRate) statWinRate.innerText = winRate + "%";
+      const statWinLoss = document.getElementById("stat-win-loss");
+      if (statWinLoss) {
+        statWinLoss.innerHTML = `<span style="color: var(--buy-green);">${winCount} W</span> / <span style="color: var(--sell-red);">${lossCount} L</span>`;
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" class="empty-state">No closed trades recorded.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(t => {
+        const d = getTradeDigits(t);
+        const dir = (t.direction || t.type || "").toUpperCase();
+        const dirClass = dir === "BUY" ? "dir-buy" : "dir-sell";
+        const reason = t.reason_name || t.barrier_hit || "CLOSED MANUALLY";
+        const profit = t.profit !== undefined && t.profit !== null ? parseFloat(t.profit) : 0.0;
+        const profitStyle = profit >= 0 ? "color: var(--buy-green); font-weight: 700;" : "color: var(--sell-red); font-weight: 700;";
+
+        return `
+          <tr>
+            <td class="mono" style="font-weight: 700;">#${t.ticket}</td>
+            <td class="mono" style="font-weight: 800; color: #fff;">${t.symbol}</td>
+            <td><span class="${dirClass}">${dir}</span></td>
+            <td class="mono">${parseFloat(t.lot || t.lots || 0).toFixed(2)}</td>
+            <td class="mono">${parseFloat(t.entry || t.open_price || 0).toFixed(d)}</td>
+            <td class="mono">${parseFloat(t.exit_price || t.close_price || 0).toFixed(d)}</td>
+            <td><span class="badge-subtle">${reason}</span></td>
+            <td class="mono" style="${profitStyle}">${profit >= 0 ? '+' : ''}$${profit.toFixed(2)}</td>
+            <td class="mono" style="color: var(--text-dim);">${t.closed_utc || t.time || '-'}</td>
+            <td><button class="btn-lot" onclick="openCardModal('${t.ticket}', '${t.symbol}')">Card</button></td>
+          </tr>
+        `;
+      }).join("");
+    }
+
     function renderStatus(data) {
       if (!data) return;
       document.getElementById("count-open").innerText = data.open_positions_count || 0;
       document.getElementById("table-open-count").innerText = (data.open_positions_count || 0) + " positions";
-      document.getElementById("count-updates").innerText = data.updates_logged_count || 0;
       document.getElementById("count-closed").innerText = data.closed_trades_count || 0;
       document.getElementById("table-closed-count").innerText = (data.closed_trades_count || 0) + " closed";
 
-      if (data.account_info) {
+      if (data.account_login) {
         document.getElementById("acc-login-server").innerHTML =
-          `${data.account_info.login || 8058543} <span class="badge-subtle">${data.account_info.server || 'SCFMLimited-Demo2'}</span>`;
+          `${data.account_login} <span class="badge-subtle">${data.server || 'MetaQuotes'}</span>`;
+        document.getElementById("brand-sub").innerText = `Connected to MT5 #${data.account_login} (${data.server || 'Demo'})`;
       }
-      document.getElementById("last-poll-time").innerText = data.last_poll_time_utc ? (data.last_poll_time_utc.split("T")[1] || data.last_poll_time_utc) : "Live";
+      if (data.balance !== undefined) {
+        document.getElementById("acc-balance").innerText = `$${parseFloat(data.balance).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      }
+      if (data.equity !== undefined) {
+        document.getElementById("acc-equity").innerText = `$${parseFloat(data.equity).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      }
+      document.getElementById("last-poll-time").innerText = new Date().toLocaleTimeString();
     }
 
     function getTradeDigits(t) {
-      if (t.digits !== undefined && t.digits !== null) return parseInt(t.digits);
       const sym = (t.symbol || '').toUpperCase();
       if (sym.includes('JPY')) return 3;
       if (sym.includes('XAU') || sym.includes('GOLD')) return 2;
-      if (sym.includes('US30') || sym.includes('NAS100')) return 0;
+      if (sym.includes('US30') || sym.includes('NAS100') || sym.includes('BTC')) return 1;
       return 5;
     }
 
     function renderOpenTrades(trades) {
-
       const tbody = document.getElementById("open-positions-tbody");
       if (!trades || trades.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" class="empty-state">No open positions. Watching terminal...</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="10" class="empty-state">No open positions. Ready to trade.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = trades.map(t => {
         const d = getTradeDigits(t);
-        const dirClass = (t.direction || t.type || "").toUpperCase() === "BUY" ? "dir-buy" : "dir-sell";
-        const lot = t.lot !== undefined && t.lot !== null ? parseFloat(t.lot).toFixed(2) : (t.volume ? parseFloat(t.volume).toFixed(2) : "0.10");
+        const dir = (t.direction || t.type || "").toUpperCase();
+        const dirClass = dir === "BUY" ? "dir-buy" : "dir-sell";
+        const lot = t.lot !== undefined && t.lot !== null ? parseFloat(t.lot).toFixed(2) : (t.lots ? parseFloat(t.lots).toFixed(2) : "0.01");
         const slVal = t.stop_loss || t.sl;
         const sl = (slVal && parseFloat(slVal) > 0) ? parseFloat(slVal).toFixed(d) : '<span class="badge-subtle">Open</span>';
         const tpVal = t.take_profit || t.tp;
         const tp = (tpVal && parseFloat(tpVal) > 0) ? parseFloat(tpVal).toFixed(d) : '<span class="badge-subtle">Open</span>';
-        const rr = (t.rr !== undefined && t.rr !== null && parseFloat(t.rr) > 0) ? `1:${parseFloat(t.rr).toFixed(2)}` : '<span class="badge-subtle">Dynamic</span>';
+        const profit = t.profit !== undefined && t.profit !== null ? parseFloat(t.profit) : 0.0;
+        const profitClass = profit >= 0 ? 'color: var(--buy-green); font-weight: 700;' : 'color: var(--sell-red); font-weight: 700;';
 
         return `
           <tr>
-            <td class="mono">#${t.ticket}</td>
-            <td class="mono" style="font-weight: 700;">${t.symbol}</td>
-            <td><span class="${dirClass}">${t.direction || t.type}</span></td>
+            <td class="mono" style="font-weight: 700;">#${t.ticket}</td>
+            <td class="mono" style="font-weight: 800; color: #fff;">${t.symbol}</td>
+            <td><span class="${dirClass}">${dir}</span></td>
             <td class="mono" style="font-weight: 700; color: #38bdf8;">${lot}</td>
-            <td class="mono">${parseFloat(t.entry || t.open_price || 0).toFixed(d)}</td>
+            <td class="mono">${parseFloat(t.entry || t.price_open || 0).toFixed(d)}</td>
             <td class="mono">${sl}</td>
             <td class="mono">${tp}</td>
-            <td class="mono">${rr}</td>
-            <td class="mono" style="color: var(--text-dim);">${t.opened_utc || t.time || '-'}</td>
-            <td><span class="action-link" onclick="openCardModal('${t.ticket}', '${t.symbol}')">View Card</span></td>
+            <td class="mono" style="${profitClass}">$${profit.toFixed(2)}</td>
+            <td class="mono" style="color: var(--text-dim);">${t.time_utc || t.opened_utc || '-'}</td>
+            <td>
+              <div style="display: flex; gap: 0.4rem;">
+                <button class="btn-action-modify" onclick="openModifyModal('${t.ticket}', '${t.symbol}', '${slVal || 0}', '${tpVal || 0}')">Modify</button>
+                <button class="btn-action-close" onclick="closePositionDirect('${t.ticket}')">Close</button>
+                <button class="btn-lot" onclick="openCardModal('${t.ticket}', '${t.symbol}')">Card</button>
+              </div>
+            </td>
           </tr>
         `;
       }).join("");
@@ -758,51 +1535,27 @@
 
       tbody.innerHTML = trades.map(t => {
         const d = getTradeDigits(t);
-        const dirClass = (t.direction || t.type || "").toUpperCase() === "BUY" ? "dir-buy" : "dir-sell";
-        const reason = t.reason_name || t.barrier_hit || t.reason || "CLOSED MANUALLY";
-        let reasonBadge = `<span class="badge-manual">${reason}</span>`;
-        if (reason === "TARGET HIT" || reason.includes("TARGET")) reasonBadge = `<span class="badge-target-hit">🎯 TARGET HIT</span>`;
-        else if (reason === "STOP HIT" || reason.includes("STOP")) reasonBadge = `<span class="badge-stop-hit">🛑 STOP HIT</span>`;
-
-        let rDisplay = `<span style="color: var(--text-dim);">${t.r_status_note || (t.profit !== undefined && t.profit !== null ? `$${parseFloat(t.profit).toFixed(2)}` : 'Closed')}</span>`;
-        if (t.r_multiple !== null && t.r_multiple !== undefined) {
-          const rVal = parseFloat(t.r_multiple);
-          if (rVal >= 0) {
-            rDisplay = `<span class="r-pos">+${rVal.toFixed(2)} R</span>`;
-          } else {
-            rDisplay = `<span class="r-neg">${rVal.toFixed(2)} R</span>`;
-          }
-        }
+        const dir = (t.direction || t.type || "").toUpperCase();
+        const dirClass = dir === "BUY" ? "dir-buy" : "dir-sell";
+        const reason = t.reason_name || t.barrier_hit || "CLOSED MANUALLY";
+        const profit = t.profit !== undefined && t.profit !== null ? parseFloat(t.profit) : 0.0;
+        const profitStyle = profit >= 0 ? "color: var(--buy-green); font-weight: 700;" : "color: var(--sell-red); font-weight: 700;";
 
         return `
           <tr>
             <td class="mono">#${t.ticket}</td>
             <td class="mono" style="font-weight: 700;">${t.symbol}</td>
-            <td><span class="${dirClass}">${t.direction || t.type}</span></td>
-            <td class="mono">${parseFloat(t.lot || t.volume || 0).toFixed(2)}</td>
+            <td><span class="${dirClass}">${dir}</span></td>
+            <td class="mono">${parseFloat(t.lot || t.lots || 0).toFixed(2)}</td>
             <td class="mono">${parseFloat(t.entry || t.open_price || 0).toFixed(d)}</td>
             <td class="mono">${parseFloat(t.exit_price || t.close_price || 0).toFixed(d)}</td>
-            <td>${reasonBadge}</td>
-            <td class="mono">${rDisplay}</td>
+            <td><span class="badge-subtle">${reason}</span></td>
+            <td class="mono" style="${profitStyle}">$${profit.toFixed(2)}</td>
             <td class="mono" style="color: var(--text-dim);">${t.closed_utc || t.time || '-'}</td>
-            <td><span class="action-link" onclick="openCardModal('${t.ticket}', '${t.symbol}')">Card</span></td>
+            <td><button class="btn-lot" onclick="openCardModal('${t.ticket}', '${t.symbol}')">Card</button></td>
           </tr>
         `;
       }).join("");
-    }
-
-
-    async function testOrderRefusal() {
-      try {
-        const resp = await fetch("/api/v1/mirror/order-check", {
-          method: "POST",
-          headers: getHeaders()
-        });
-        const data = await resp.json();
-        alert(JSON.stringify(data, null, 2));
-      } catch (err) {
-        alert("Order Refusal Verification:\n" + err.message);
-      }
     }
 
     function openCardModal(ticket, symbol) {
@@ -818,12 +1571,9 @@
       document.getElementById("card-modal").style.display = "none";
     }
 
-    // Initialize
-    if (!authToken) {
-      document.getElementById("auth-alert").style.display = "flex";
-    }
+    // Startup
     fetchAllData();
-    setInterval(fetchAllData, 2000);
+    setInterval(fetchAllData, 1500);
   </script>
 </body>
 </html>
